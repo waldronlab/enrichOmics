@@ -3,7 +3,7 @@ Version: 1.0.0
 Date: 2017-07-28
 Title: Functional enrichment analysis of high-throughput gene expression data
 Author: Ludwig Geistlinger, Levi Waldron
-Maintainer: Ludwig Geistlinger <Ludwig.Geistlinger@web.de>
+Maintainer: Ludwig Geistlinger <Ludwig.Geistlinger@sph.cuny.edu>
 Depends: R(>= 3.4), EnrichmentBrowser, regioneR, MultiAssayExperiment, mogsa 
 Suggests: ALL, BSgenome.Hsapiens.UCSC.hg19.masked, BiocStyle, airway, hgu95av2.db, 
 	knitr, rmarkdown

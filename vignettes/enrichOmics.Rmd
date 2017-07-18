@@ -62,9 +62,9 @@ Further information can be found in the [vignette](http://www.bioconductor.org/p
 
 ## Data types
 
-Although RNA-seq (read count data) has become the de facto standard for transcriptomic profiling, it is important to know that many methods for differential expression and gene set enrichment analysis have been originally developed for microarray data (intensity measurements).
+Although RNA-seq (read count data) has become the *de facto* standard for transcriptomic profiling, it is important to know that many methods for differential expression and gene set enrichment analysis have been originally developed for microarray data (intensity measurements).
 
-However, differences in data distribution assumptions (microarray: quasi-normal, RNA-seq: negative binomial) made adaptions in differential expression analysis and, to some extent, also in gene set enrichment analysis necessary.
+However, differences in data distribution assumptions (microarray: quasi-normal, RNA-seq: negative binomial) made adaptations in differential expression analysis and, to some extent, also in gene set enrichment analysis necessary.
 
 Thus, we consider two example datasets - a microarray and a RNA-seq dataset, and discuss similarities and differences of the respective analysis steps. 
 
@@ -198,12 +198,12 @@ Note #2: Independent of the expression data type under investigation, overlap be
 ## Functional class scoring & permutation testing
 
 A major limitation of ORA is that it restricts analysis to DE genes, excluding genes not satisfying the chosen significance threshold (typically the vast majority).
-This is resolved by gene set enrichment analysis (GSEA), which scores the tendency of gene set members to appear rather at the top or bottom of the ranked list of all measured genes [Subramanian et al., 2005](https://doi.org/10.1073/pnas.0506580102). The statistical signficance of the enrichment score (ES) of a gene set is assessed via sample permutation, i.e. (1) sample labels (= group assignment) are shuffled, (2) per-gene DE statistics are recomputed, and (3) the enrichment score is recomputed. Repeating this procedure many times allows to determine the empirical distribution of the enrichment score and to compare the observed enrichment score against it. Here, we carry out GSEA with 1000 permutations.     
+This is resolved by gene set enrichment analysis (GSEA), which scores the tendency of gene set members to appear rather at the top or bottom of the ranked list of all measured genes [Subramanian et al., 2005](https://doi.org/10.1073/pnas.0506580102). The statistical significance of the enrichment score (ES) of a gene set is assessed via sample permutation, i.e. (1) sample labels (= group assignment) are shuffled, (2) per-gene DE statistics are recomputed, and (3) the enrichment score is recomputed. Repeating this procedure many times allows to determine the empirical distribution of the enrichment score and to compare the observed enrichment score against it. Here, we carry out GSEA with 1000 permutations.     
 ```{r}
 gsea.all <- sbea(method="gsea", eset=all.eset, gs=hsa.gs, perm=1000)  
 gs.ranking(gsea.all)
 ```
-As GSEA's permutation procedure involves re-computation of per-gene DE statistics, adaptions are necessary for RNA-seq. The EnrichmentBrowser implements an accordingly adapted version of GSEA, which allows incorporation of limma/voom, edgeR, or DESeq2 for repeated DE re-computation within GSEA. However, this is computationally intensive (for limma/voom the least, for DESeq2 the most). Note the relatively long running times for only 100 permutations having used edgeR for DE analysis.
+As GSEA's permutation procedure involves re-computation of per-gene DE statistics, adaptations are necessary for RNA-seq. The EnrichmentBrowser implements an accordingly adapted version of GSEA, which allows incorporation of limma/voom, edgeR, or DESeq2 for repeated DE re-computation within GSEA. However, this is computationally intensive (for limma/voom the least, for DESeq2 the most). Note the relatively long running times for only 100 permutations having used edgeR for DE analysis.
 ```{r, eval=FALSE}
 gsea.air <- sbea(method="gsea", eset=air.eset, gs=hsa.gs, perm=100)  
 ```
@@ -232,7 +232,7 @@ pwys <- file.path(data.dir, "hsa_kegg_pwys.zip")
 hsa.grn <- compile.grn.from.kegg(pwys)
 head(hsa.grn)
 ```
-Signaling pathway impact analysis (SPIA) is a network-based enrichment analysis method, which is explicitely designed for KEGG signaling pathways [Tarca et al., 2009](https://doi.org/ 10.1093/bioinformatics/btn577). The method evalutates whether expression changes are propagated across the pathway topology in combination with ORA.
+Signaling pathway impact analysis (SPIA) is a network-based enrichment analysis method, which is explicitly designed for KEGG signaling pathways [Tarca et al., 2009](https://doi.org/ 10.1093/bioinformatics/btn577). The method evaluates whether expression changes are propagated across the pathway topology in combination with ORA.
 ```{r, eval=FALSE}
 spia.all <- nbea(method="spia", eset=all.eset, gs=hsa.gs, grn=hsa.grn, alpha=0.2)
 gs.ranking(spia.all)
@@ -258,10 +258,51 @@ By recomputing the overlap with the functional features in each permutation, sta
 ```{r}
 library(regioneR)
 ```
+To demonstrate the basic functionality of the package, we consider the overlap of gene promoter regions and CpG islands in the human genome. We expect to find an enrichment as promoter regions are known to be GC-rich. Hence, is the overlap between CpG islands and promoters greater than expected by chance?
 
+We use the collection of CpG islands described in [Wu et al., 2010](https://doi.org/10.1093/biostatistics/kxq005) and restrict them to the set of canonical chromosomes 1-23, *X*, and *Y*.
+```{r}
+cpgHMM <- toGRanges("http://www.haowulab.org/software/makeCGI/model-based-cpg-islands-hg19.txt")
+cpgHMM <- filterChromosomes(cpgHMM, chr.type="canonical")
+cpgHMM <- sort(cpgHMM)
+cpgHMM
+```
+Analogously, we load promoter regions in the *hg19* human genome assembly as available from [UCSC](https://genome.ucsc.edu/):
+```{r}
+promoters <- toGRanges("http://gattaca.imppc.org/regioner/data/UCSC.promoters.hg19.bed")
+promoters <- filterChromosomes(promoters, chr.type="canonical")
+promoters <- sort(promoters)
+promoters
+```
+To speed up the example, we restrict analysis to chromosomes 21 and 22. Note that this is done for demonstration only. To make an accurate claim, the complete region set should be used (which, however, runs considerably longer).
+```{r}
+cpg <- cpgHMM[seqnames(cpgHMM) %in% c("chr21", "chr22")]
+prom <- promoters[seqnames(promoters) %in% c("chr21", "chr22")]
+```
+Now, we are applying an overlap permutation test with 100 permutations (`ntimes=100`), while maintaining chromosomal distribution of the CpG island region set (`per.chromosome=TRUE`). Furthermore, we use the option `count.once=TRUE` to count an overlapping CpG island only once, even if it overlaps with 2 or more promoters. This takes about 2 minutes on a standard laptop.
+```{r}
+pt <- overlapPermTest(cpg, prom, genome="hg19", ntimes=100, per.chromosome=TRUE, count.once=TRUE)
+pt
+summary(pt[[1]]$permuted)
+```
+The resulting permutation *p*-value indicates a significant enrichment. Out of the `r length(cpg)` CpG islands, `r pt[[1]]$observed` overlap with at least one promoter. In contrast, when repeatedly drawing random regions matching the CpG islands in size and chromosomal distribution, the mean number of overlapping regions across permutations was `r round(mean(pt[[1]]$permuted), digits=1)` $\pm$ `r round(sd(pt[[1]]$permuted), digits=1)`. 
 
+Note #1: The function `regioneR::permTest` allows to incorporate user-defined functions for randomizing regions and evaluating additional measures of overlap such as total genomic size in bp.
+
+Note #2: The `r Biocpkg("LOLA")` package implements a genomic region ORA, which assesses genomic region overlap based on the hypergeometric distribution using a library of pre-defined functional region sets.
 
 # Multi-omics enrichment analysis
+Multi-omics experiments are increasingly commonplace in biomedical research as e.g. apparent in recent large-scale projects such as [ENCODE](https://www.encodeproject.org) and [TCGA](https://cancergenome.nih.gov). Such experiments are composed of multiple complementary data types for a set of samples, thereby adding layers of complexity to experimental design, data integration, and analysis. In Bioconductor, the `r Biocpkg("MultiAssayExperiment")` package provides data structures and methods for representing, manipulating, and integrating multi-assay genomic experiments.
+```{r}
+library(MultiAssayExperiment)
+```
+So far in the workshop: transcriptomic and genomic enrichment.
+However, methods for multi-omics enrichment analysis are still nascent.
+Here, we consider the `r Biocpkg("mogsa")` package, which uses multivariate extensions of principal component analysis (PCA) to project the data onto a lower dimensional space so that relationships between datasets can be identified.
+```{r}
+library(mogsa)
+```
+
 
 ```{r}
 sessionInfo()

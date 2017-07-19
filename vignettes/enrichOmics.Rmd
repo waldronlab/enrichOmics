@@ -75,8 +75,7 @@ We load the `r Biocpkg("ALL")` dataset
 library(ALL)
 data(ALL)
 ```
-and select B-cell ALL patients with and without the BCR/ABL fusion as it has
-been described previously [Gentleman et al., 2005](https://www.bioconductor.org/help/publications/books/bioinformatics-and-computational-biology-solutions).
+and select B-cell ALL patients with and without the BCR/ABL fusion, as described previously [Gentleman et al., 2005](https://www.bioconductor.org/help/publications/books/bioinformatics-and-computational-biology-solutions).
 ```{r}
 ind.bs <- grep("^B", ALL$BT)
 ind.mut <- which(ALL$mol.biol %in% c("BCR/ABL", "NEG"))
@@ -92,7 +91,7 @@ exprs(all.eset)[1:4,1:4]
 As we often have more than one probe per gene, we compute gene expression values
 as the average of the corresponding probe values.
 ```{r}
-all.eset <- probe.2.gene.eset(all.eset) 
+all.eset <- EnrichmentBrowser::probe.2.gene.eset(all.eset) 
 head(featureNames(all.eset))
 ```
 For RNA-seq data, we consider transcriptome profiles of four primary human airway smooth muscle cell lines in two conditions: control and treatment with dexamethasone [Himes et al., 2014](https://doi.org/10.1371/journal.pone.0099625).
@@ -103,11 +102,12 @@ library(airway)
 data(airway)
 ```
 and create an `Biobase::ExpressionSet`. 
+##make a note about why we're using ExpressionSet objects
 For further analysis, we only keep genes that are annotated to an ENSEMBL gene ID.
 ```{r}
-expr <- assays(airway)[[1]]
-expr <- expr[grep("^ENSG", rownames(expr)),]
-air.eset <- new("ExpressionSet", exprs=expr, annotation="hsa")
+air.eset <- as(airway, "ExpressionSet")
+annotation(air.eset) <- "hsa"
+air.eset <- air.eset[grep("^ENSG", rownames(air.eset)), ]
 dim(air.eset)
 exprs(air.eset)[1:4,1:4]
 ```
@@ -116,12 +116,18 @@ exprs(air.eset)[1:4,1:4]
 
 Normalization of high-throughput expression data is essential to make results within and between experiments comparable. Microarray (intensity measurements) and RNA-seq (read counts) data typically show distinct features that need to be normalized for. As this is beyond the scope of this workshop, we refer to `r Biocpkg("limma")` for microarray normalization and `r Biocpkg("EDASeq")` for RNA-seq normalization. See also `EnrichmentBrowser::normalize`, which wraps commonly used functionality for normalization.
 
-Differential expression analysis between sample groups can be performed using the function `EnrichmentBrowser::de.ana`. As a prerequisite, the phenotype data should contain a group assignment for each patient. For the ALL dataset, this indicates whether the BCR-ABL gene fusion is present (1) or not (0).
+## a little more introduction to EnrichmentBrowser would be nice here - it provides a wrapper to limma and edgeR for differential expression in microarray and RNA-seq data, and provides ... gene set enrichment methods.
+
+Differential expression analysis between sample groups can be performed using the function `EnrichmentBrowser::de.ana`. ##what methods are used? 
+
+The `EnrichmentBrowser::de.ana()` we will use assumes some standardized variable names: **GROUP** defines the groups being contrasted in the differential expression analysis, **BLOCK** defines a blocking variable (cite) such as for batch effects.
+
+For the ALL dataset, the **GROUP** variable indicates whether the BCR-ABL gene fusion is present (1) or not (0).
 ```{r}
 pData(all.eset)$GROUP <- ifelse(all.eset$mol.biol == "BCR/ABL", 1, 0)
 table(pData(all.eset)$GROUP)
 ```
-For the airway dataset, this indicates whether the cell lines have been treated
+For the airway dataset, it indicates whether the cell lines have been treated
 with dexamethasone (1) or not (0).
 ```{r}
 pData(air.eset)$GROUP <- ifelse(colData(airway)$dex == "trt", 1, 0)
@@ -140,7 +146,7 @@ head(fData(all.eset), n=4)
 ```
 Nominal *p*-values are already corrected for multiple testing (`ADJ.PVAL`) using the method from Benjamini and Hochberg implemented in `stats::p.adjust`.
 
-For RNA-seq data, the `de.ana` function carries out differential expression analysis between the two groups either based on functionality from `r Biocpkg("limma")` (that includes the `voom` transformation), or alternatively, the frequently used `r Biocpkg("edgeR")` or `r Biocpkg("DESeq2")` package. Here, we use the analysis based on `r Biocpkg("edgeR")`.
+For RNA-seq data, the `de.ana` function can be used to carry out differential expression analysis between the two groups either based on functionality from `r Biocpkg("limma")` (that includes the `voom` transformation), or alternatively, the frequently used `r Biocpkg("edgeR")` or `r Biocpkg("DESeq2")` package. Here, we use the analysis based on `r Biocpkg("edgeR")`.
 ```{r}
 air.eset <- de.ana(air.eset, de.method="edgeR")
 head(fData(air.eset), n=4)
@@ -148,7 +154,7 @@ head(fData(air.eset), n=4)
 
 ## Gene sets
 
-We are now interested whether there are not only single genes that are differentially expressed, but also sets of genes known to work together, e.g. as defined in the [Gene Ontology](http://www.geneontology.org) or the [KEGG](http://www.genome.jp/kegg) pathway annotation. The function `get.kegg.genesets` downloads all KEGG pathways for a chosen organism (here: *Homo sapiens*) as gene sets.
+We are now interested in whether pre-defined sets of genes that are known to work together, e.g. as defined in the [Gene Ontology](http://www.geneontology.org) or the [KEGG](http://www.genome.jp/kegg) pathway annotation, are coordinately differentially expressed. The function `get.kegg.genesets` downloads all KEGG pathways for a chosen organism (here: *Homo sapiens*) as gene sets using Entrez Gene identifiers.
 ```{r, eval=FALSE}
 kegg.gs <- get.kegg.genesets("hsa")
 ```
@@ -156,7 +162,7 @@ Analogously, the function `get.go.genesets` retrieves GO terms of a selected ont
 ```{r, eval=FALSE}
 go.gs <- get.go.genesets(org="hsa", onto="BP", mode="GO.db")
 ```
-User-defined gene sets can be parsed from GMT file format
+User-defined gene sets can be parsed from GMT file format, for example reading Homo Sapiens Entrez Gene gene sets from the EnrichmentBrowser package:
 ```{r}
 data.dir <- system.file("extdata", package="EnrichmentBrowser")
 gmt.file <- file.path(data.dir, "hsa_kegg_gs.gmt")
@@ -187,13 +193,22 @@ The resulting summary page includes for each significant gene set
 
 As ORA works on the list of DE genes and not the actual expression values, it can be straightforward applied to RNA-seq data. However, as the gene sets here contain NCBI Entrez gene IDs and the airway dataset contains ENSEMBL gene ids, we first map the airway dataset to Entrez IDs.  
 ```{r}
-air.eset <- map.ids(air.eset, from="ENSEMBL", to="ENTREZID")
+air.eset <- map.ids(air.eset, org="hsa", from="ENSEMBL", to="ENTREZID")
 ora.air <- sbea(method="ora", eset=air.eset, gs=hsa.gs, perm=0)
 gs.ranking(ora.air)
 ```
+
 Note #1: [Young et al., 2010](https://doi.org/10.1186/gb-2010-11-2-r14), have reported biased results for ORA on RNA-seq data due to over-detection of differential expression for long and highly expressed transcripts. The `r Biocpkg("goseq")` package and `limma::goana` implement possibilities to adjust ORA for gene length and abundance bias.
 
 Note #2: Independent of the expression data type under investigation, overlap between gene sets can result in redundant findings. This is well-documented for GO (parent-child structure, [Rhee et al., 2008](https://doi.org/10.1038/nrg2363)) and KEGG (pathway overlap/crosstalk, [Donato et al., 2013](https://doi.org/10.1101/gr.153551.112)). The `r Biocpkg("topGO")` package (explicitly designed for GO) and `r Biocpkg("mgsa")` (applicable to arbitrary gene set definitions) implement modifications of ORA to account for such redundancies.
+
+## LW note
+
+I think an earlier on discussion of major advantages and drawbacks of different approaches would be very helpful. The fact that some methods have elevated type I error rate is the most concerning to me, e.g. see http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0079217. Also note the author of SAFE (William Barry) works at DFCI Biostat & Comp Bio and may be there! Would be a good chance to show off your super impressive feature:
+
+```{r}
+sbea.methods()
+```
 
 ## Functional class scoring & permutation testing
 
@@ -215,7 +230,7 @@ gs.ranking(roast.air)
 
 ## Network-based enrichment analysis
 Having found gene sets that show enrichment for differential expression, 
-we are now interested whether these findings can be supported by known regulatory interactions. 
+we are now interested in whether these findings can be supported by known regulatory interactions. 
 For example, we want to know whether transcription factors and their target genes are expressed in accordance to the connecting regulations (activation/inhibition). 
 Such information is usually given in a gene regulatory network derived from specific experiments or compiled from the literature ([Geistlinger et al., 2013](https://doi.org/10.1093/nar/gkt631) for an example).
 There are well-studied processes and organisms for which comprehensive and well-annotated regulatory networks are available, e.g. the [RegulonDB](http://regulondb.ccg.unam.mx) for *E. coli* and [Yeastract](http://www.yeastract.com) for *S. cerevisiae*. 
@@ -242,9 +257,11 @@ More generally applicable is gene graph enrichment analysis (GGEA), which evalua
 ggea.all <- nbea(method="ggea", eset=all.eset, gs=hsa.gs, grn=hsa.grn)
 gs.ranking(ggea.all)
 ```
-Note #1: As network-based enrichment methods typically not involve sample permutation but rather network permutation, thus avoiding DE re-computation, they can likewise be applied to RNA-seq data.
+Note #1: As network-based enrichment methods typically do not involve sample permutation but rather network permutation (competitive null?), thus avoiding DE re-computation, they can likewise be applied to RNA-seq data.
 
 Note #2: Given the various enrichment methods with individual benefits and limitations, combining multiple methods can be beneficial, e.g. combined application of a set-based and a network-based method. This has been shown to filter out spurious hits of individual methods and to reduce the outcome to gene sets accumulating evidence from different methods [Geistlinger et al., 2016](https://doi.org/10.1186/s12859-016-0884-1), [Alhamdoosh et al., 2017](https://doi.org/10.1093/bioinformatics/btw623). See the EnrichmentBrowser [vignette](http://www.bioconductor.org/packages/release/bioc/vignettes/EnrichmentBrowser/inst/doc/EnrichmentBrowser.pdf), Section 9: *Combining results*.
+
+LW: Why not show it off here? People will be impressed to be able to easily perform and compare results from many different approaches. And, would "comparing" results be a better way to put it than "combining" results? 
 
 # Genomic region enrichment analysis
 

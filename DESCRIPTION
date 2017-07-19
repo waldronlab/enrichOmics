@@ -1,6 +1,6 @@
 Package: enrichOmics
 Title: Functional enrichment analysis of high-throughput omics data
-Version: 1.0.0
+Version: 0.9.0
 Description:
     Overview of existing methods for enrichment analysis of gene expression data
     with regard to functional gene sets, pathways, and networks. Functionality 

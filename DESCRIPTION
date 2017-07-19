@@ -1,22 +1,45 @@
 Package: enrichOmics
+Title: Functional enrichment analysis of high-throughput omics data
 Version: 1.0.0
-Date: 2017-07-28
-Title: Functional enrichment analysis of high-throughput gene expression data
-Author: Ludwig Geistlinger, Levi Waldron
+Description:
+    Overview of existing methods for enrichment analysis of gene expression data
+    with regard to functional gene sets, pathways, and networks. Functionality 
+    for differential expression analysis, set- and network-based enrichment 
+    analysis, along with visualization and exploration of results. Introduction 
+    to concepts for enrichment analysis of genomic regions and regulatory
+    elements. Outlook on current developments to extend gene set enrichment
+    analysis for data derived from multiple high-throughput omics assays.
+Author: 
+    Ludwig Geistlinger <Ludwig.Geistlinger@sph.cuny.edu>,
+    Levi Waldron <lwaldron.research@gmail.com>,
+    Marcel Ramos <marcel.ramos@roswellpark.org>,
+    Lucas Schiffer <schiffer.lucas@gmail.com>
 Maintainer: Ludwig Geistlinger <Ludwig.Geistlinger@sph.cuny.edu>
-Depends: R(>= 3.4), EnrichmentBrowser, regioneR, MultiAssayExperiment, mogsa 
-Suggests: ALL, BSgenome.Hsapiens.UCSC.hg19.masked, BiocStyle, airway, hgu95av2.db, 
-	knitr, rmarkdown
-VignetteBuilder: knitr
-SystemRequirements: pandoc (>= 1.19.2.1) - http://pandoc.org
-Description: Overview of existing methods for enrichment analysis of gene expression 
-	data with regard to functional gene sets, pathways, and networks. Functionality for 
-	differential expression analysis, set- and network-based enrichment analysis, along 
-	with visualization and exploration of results. Introduction to concepts for enrichment 
-	analysis of genomic regions and regulatory elements. Outlook on current developments 
-	to extend gene set enrichment analysis for data derived from multiple high-throughput 
-	omics assays. 
 License: Artistic-2.0
-biocViews: Microarray, RNASeq, GeneExpression, DifferentialExpression,
-        Pathways, GraphAndNetwork, Network, GeneSetEnrichment,
-        NetworkEnrichment, Visualization, ReportWriting
+Depends:
+    R(>= 3.4)
+Suggests: 
+    airway,
+    ALL,
+    BiocStyle,
+    BSgenome.Hsapiens.UCSC.hg19.masked,
+    EnrichmentBrowser,
+    hgu95av2.db,
+	knitr,
+    mogsa,
+    MultiAssayExperiment,
+    regioneR,
+	rmarkdown
+biocViews: 
+    Microarray, 
+    RNASeq, 
+    GeneExpression, 
+    DifferentialExpression,
+    Pathways, 
+    GraphAndNetwork, 
+    Network, 
+    GeneSetEnrichment,
+    NetworkEnrichment,
+    Visualization,
+    ReportWriting
+VignetteBuilder: knitr

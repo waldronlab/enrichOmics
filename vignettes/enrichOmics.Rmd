@@ -69,7 +69,8 @@ deTable
 ```
 
 where the overlap of 28 genes can be assessed based on the hypergeometric distribution.
-This corresponds to a one-sided Fisher's exact test, yielding here a significant enrichment.
+This corresponds to a one-sided version of Fisher's exact test, yielding here a
+significant enrichment.
 
 ```{r fisher}
 fisher.test(deTable, alternative = "greater")
@@ -122,7 +123,7 @@ metabolic and signaling pathways.
 Metabolic pathways such as glycolysis represent biochemical substrate conversions
 by specific enzymes. Signaling pathways such as the MAPK signaling pathway describe 
 signal transduction cascades from receptor proteins to transcription factors, 
-resulting in activiation or inhibition of specific target genes.
+resulting in activation or inhibition of specific target genes.
 
 Gene regulatory networks describe the interplay and effects of regulatory
 factors (such as transcription factors and microRNAs) on the expression of their
@@ -183,15 +184,15 @@ However, there is also a specific method from
 **Underlying null: competitive vs. self-contained**
 
 [Goeman and Buehlmann, 2007](https://doi.org/10.1093/bioinformatics/btm051)
-classified existing enrichment methods into *competetive* and *self-contained* 
+classified existing enrichment methods into *competitive* and *self-contained* 
 based on the underlying null hypothesis.
 
-- *Competetive* null hypothesis: the genes in the set of interest are at most as
+- *Competitive* null hypothesis: the genes in the set of interest are at most as
 often DE as the genes not in the set, 
 - *Self-contained* null hypothesis: no genes in the set of interest are DE.
 
 Although the authors argue that a self-contained null is closer to the actual 
-question of interest, the vast majority of enrichment methods is competetive.
+question of interest, the vast majority of enrichment methods is competitive.
 
 Goeman and Buehlmann further raise several critical issues concerning the 2x2 ORA:
 
@@ -219,7 +220,7 @@ inaccurate and time-consuming
 **Generations: ora, fcs & topology-based**
 
 [Khatri et al., 2012](https://doi.org/10.1371/journal.pcbi.1002375) have taken a
-slightly different approach by classifiying methods along the timeline of 
+slightly different approach by classifying methods along the timeline of 
 development into three generations:
 
 1. Generation: ORA methods based on the 2x2 contingency table test,
@@ -236,7 +237,7 @@ on the transcriptional level (such as protein-protein interactions) and insuffic
 [Bayerlova et al., 2015](https://doi.org/10.1186/s12859-015-0751-5).
 
 Given the individual benefits and limitations of existing methods,
-cautios interpretation of results is required to derive valid conclusions. 
+cautious interpretation of results is required to derive valid conclusions. 
 Whereas no single method is best suited for all application scenarios, applying
 multiple methods can be beneficial.
 This has been shown to filter out spurious hits of individual methods, thereby
@@ -316,7 +317,7 @@ air.eset <- as(airway, "ExpressionSet")
 annotation(air.eset) <- "hsa"
 ```
 Note: we are switching here from `SummarizedExperiment` to `ExpressionSet` as 
-functionality in the EnrichmentBrowser is explicitely designed for gene-level 
+functionality in the EnrichmentBrowser is explicitly designed for gene-level 
 expression data, for which `ExpressionSet` can be consistently used.
  
 For further analysis, we only keep genes that are annotated to an ENSEMBL gene ID.
@@ -458,8 +459,7 @@ gene set can be inspected in more detail.
 ```{r browseEA, eval=FALSE}
 ea.browse(ora.all)
 ```
-<!-- TODO: complex heatmap group colors
--->
+<!-- TODO: complex heatmap group colors -->
 The resulting summary page includes for each significant gene set
 
 - a gene report, which lists all genes of a set along with fold change and DE
@@ -495,13 +495,6 @@ overlap/crosstalk,
 `r Biocpkg("topGO")` package (explicitly designed for GO) and
 `r Biocpkg("mgsa")` (applicable to arbitrary gene set definitions) implement
 modifications of ORA to account for such redundancies.
-<!--
-TODO:
- Also note the author of SAFE (William Barry) works at DFCI Biostat & Comp Bio and may be there! Would be a good chance to show off your super impressive feature:
-```{r}
-sbea.methods()
-```
--->
 
 ## Functional class scoring & permutation testing
 
@@ -545,6 +538,12 @@ ROtAtion gene Set Testing (ROAST), which uses rotation instead of permutation
 ```{r roastAir}
 roast.air <- sbea(method="roast", eset=air.eset, gs=hsa.gs)
 gs.ranking(roast.air)  
+```
+
+A selection of additional methods is also available:
+
+```{r sbeaM}
+sbea.methods()
 ```
 
 ## Network-based enrichment analysis
@@ -606,9 +605,14 @@ ggea.all <- nbea(method="ggea", eset=all.eset, gs=hsa.gs, grn=hsa.grn)
 gs.ranking(ggea.all)
 ```
 
+A selection of additional network-based methods is also available:
+
+```{r nbeaM}
+nbea.methods()
+```
+
 Note #1: As network-based enrichment methods typically do not involve sample
 permutation but rather network permutation, 
-<!-- TODO: (competitive null?) --> 
 thus avoiding DE re-computation, they can likewise be applied to RNA-seq data.
 
 Note #2: Given the various enrichment methods with individual benefits and
@@ -618,13 +622,17 @@ filter out spurious hits of individual methods and to reduce the outcome to
 gene sets accumulating evidence from different methods
 [Geistlinger et al., 2016](https://doi.org/10.1186/s12859-016-0884-1),
 [Alhamdoosh et al., 2017](https://doi.org/10.1093/bioinformatics/btw623). 
-See the EnrichmentBrowser
-[vignette](http://www.bioconductor.org/packages/release/bioc/vignettes/EnrichmentBrowser/inst/doc/EnrichmentBrowser.pdf),
-Section 9: *Combining results*.
 
-<!--
-TODO: Why not show it off here? People will be impressed to be able to easily perform and compare results from many different approaches. And, would "comparing" results be a better way to put it than "combining" results? 
--->
+The function `comb.ea.results` implements the straightforward combination of
+results, thereby facilitating seamless comparison of results across methods.
+For demonstration, we use the ORA and GSEA results for the ALL dataset from the 
+previous section: 
+
+```{r combEA}
+res.list <- list(ora.all, gsea.all)
+comb.res <- comb.ea.results(res.list)
+gs.ranking(comb.res)
+```
 
 # Genomic region enrichment analysis
 
@@ -762,7 +770,7 @@ intersectRows(mae)
 intersectColumns(mae)
 ```
 
-Despite the availabibilty of multi-omics data resources, bioinformatic and
+Despite the availability of multi-omics data resources, bioinformatic and
 statistical methods for the analysis of such experiments are still nascent.
 This also holds for multi-omics enrichment analysis, where ongoing developments
 are anticipated to produce novel methods for this purpose.

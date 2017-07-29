@@ -1,5 +1,5 @@
 Package: enrichOmics
-Version: 0.99.0
+Version: 1.0.0
 Title: Functional enrichment analysis of high-throughput omics data
 Author: Ludwig Geistlinger, Marcel Ramos, Lucas Schiffer, Levi Waldron
 Maintainer: Ludwig Geistlinger <Ludwig.Geistlinger@sph.cuny.edu>
@@ -11,8 +11,8 @@ Description: Overview of existing methods for enrichment analysis of gene
     regulatory elements. Outlook on current developments to extend gene set
     enrichment analysis for data derived from multiple high-throughput omics
     assays. 
-Depends: R(>= 3.4)
-Suggests: ALL,
+Depends: R(>= 3.4),
+	ALL,
     BSgenome.Hsapiens.UCSC.hg19.masked,
     BiocStyle,
 	EnrichmentBrowser,

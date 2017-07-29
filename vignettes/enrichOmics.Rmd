@@ -792,8 +792,9 @@ score.moa[,1:5]
 ```
 
 This produces individual enrichment scores for each sample.
-We use the `r Biocpkg("limma")` for comparison of sample groups, analogous to 
-differential expression analysis.
+We use functionality from the `r Biocpkg("limma")` package for comparison of
+sample groups, 
+analogous to differential expression analysis.
 Here, we define the groups according to presence of the BRCA mutation.
 
 ```{r limmaMOGSA}

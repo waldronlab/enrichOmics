@@ -12,16 +12,16 @@ Description: Overview of existing methods for enrichment analysis of gene
     enrichment analysis for data derived from multiple high-throughput omics
     assays. 
 Depends: R(>= 3.4),
-	ALL,
+    ALL,
     BSgenome.Hsapiens.UCSC.hg19.masked,
     BiocStyle,
-	EnrichmentBrowser,
+    EnrichmentBrowser,
     MultiAssayExperiment,
     airway,
     hgu95av2.db, 
     knitr,
     mogsa,
-	readr,
+    readr,
     regioneR,
     rmarkdown
 VignetteBuilder: knitr

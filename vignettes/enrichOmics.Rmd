@@ -459,7 +459,6 @@ gene set can be inspected in more detail.
 ```{r browseEA, eval=FALSE}
 ea.browse(ora.all)
 ```
-<!-- TODO: complex heatmap group colors -->
 The resulting summary page includes for each significant gene set
 
 - a gene report, which lists all genes of a set along with fold change and DE

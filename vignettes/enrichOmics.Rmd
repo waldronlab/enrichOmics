@@ -675,7 +675,7 @@ A basic workaround is to compile a network from regulations in pathway databases
 such as KEGG.
 
 ```{R}
-hsa.grn <- compileGRN(org="hsa", db="kegg")
+hsa.grn <- compileGRN(org="hsa", db="kegg", kegg.native=TRUE)
 head(hsa.grn)
 ```
 

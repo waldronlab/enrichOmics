@@ -2,7 +2,7 @@
 output:
   rmarkdown::html_document:
     highlight: pygments
-    toc: true
+    toc: false
     toc_depth: 3
     fig_width: 5
 vignette: >
@@ -150,8 +150,8 @@ combination and exploration of results across methods.
 <img src="https://github.com/waldronlab/BrownCOBRE2018/blob/master/notebooks_day2/EnrichmentBrowserWorkflow.png?raw=true", alt="EnrichmentBrowserWorkflow image", style="width:650px">
 
 
-```{R}
-suppressPackageStartupMessages(library(EnrichmentBrowser))
+```{R, message=FALSE}
+library(EnrichmentBrowser)
 ```
 
 Further information can be found in the 
@@ -350,7 +350,7 @@ As we often have more than one probe per gene, we compute gene expression values
 as the average of the corresponding probe values.
 
 
-```{R}
+```{R, message=FALSE}
 allSE <- probe2gene(all.eset) 
 head(names(allSE))
 ```
@@ -513,11 +513,6 @@ hsa.gs <- getGenesets(gmt.file)
 hsa.gs[1:2]
 ```
 
-
-```{R}
-hsa.gs[1:2]
-```
-
 See also the [MSigDb](http://software.broadinstitute.org/gsea/msigdb) for
 additional gene set collections.
 
@@ -545,7 +540,7 @@ gene set can be inspected in more detail.
 <img src="https://github.com/waldronlab/BrownCOBRE2018/blob/master/notebooks_day2/EnrichmentBrowserNavigation.png?raw=true", alt="EnrichmentBrowserNavigation image", style="width:600px">
 
 
-```{R}
+```{R, message=FALSE}
 eaBrowse(ora.all)
 ```
 
@@ -675,7 +670,7 @@ A basic workaround is to compile a network from regulations in pathway databases
 such as KEGG.
 
 ```{R}
-hsa.grn <- compileGRN(org="hsa", db="kegg", kegg.native=TRUE)
+hsa.grn <- compileGRN(org="hsa", db="kegg")
 head(hsa.grn)
 ```
 
@@ -759,8 +754,9 @@ By recomputing the overlap with the functional features in each permutation,
 statistical significance of the observed overlap can be assessed.
 
 
-```{R}
-suppressPackageStartupMessages(library(regioneR))
+```{R, message=FALSE}
+library(regioneR)
+library(BSgenome.Hsapiens.UCSC.hg19.masked)
 ```
 
 To demonstrate the basic functionality of the package, we consider the overlap
@@ -812,20 +808,20 @@ Note that we use 100 permutations for demonstration only.
 To draw robust conclusions a minimum of 1000 permutations should be carried out.
 
 ```{R}
-pt <- overlapPermTest(cpg, prom, genome="hg19", ntimes=100, per.chromosome=TRUE, count.once=TRUE)
-pt
+res <- overlapPermTest(cpg, prom, genome="hg19", ntimes=100, per.chromosome=TRUE, count.once=TRUE)
+res
 ```
 
 ```{R}
-summary(pt[[1]]$permuted)
+summary(res[[1]]$permuted)
 ```
 
 The resulting permutation *p*-value indicates a significant enrichment. Out of
-the 2859 CpG islands, 719 overlap with at least one
+the `r length(cpg)` CpG islands, `r res[[1]]$observed` overlap with at least one
 promoter. In contrast, when repeatedly drawing random regions matching the CpG
 islands in size and chromosomal distribution, the mean number of overlapping
-regions across permutations was 117.7
-$\pm$ 11.8. 
+regions across permutations was `r round(mean(res[[1]]$permuted), digits=1)` 
+$\pm$ `r round(sd(res[[1]]$permuted), digits=1)`. 
 
 Note #1: The function `regioneR::permTest` allows to incorporate user-defined
 functions for randomizing regions and evaluating additional measures of overlap

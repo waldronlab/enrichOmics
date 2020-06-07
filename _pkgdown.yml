@@ -1,0 +1,19 @@
+title: "enrichOmics"
+
+url: https://waldronlab.io/enrichOmics
+
+template:
+  params:
+    bootswatch: flatly
+
+navbar:
+  title: ~
+  type: default
+  left:
+    - text: Workshop
+      href: articles/Geistlinger_enrichOmics.html
+  right:
+    - icon: fa-github
+      href: https://github.com/waldronlab/enrichOmics
+     
+

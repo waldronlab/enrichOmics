@@ -23,6 +23,8 @@ Suggests:
     rmarkdown
 VignetteBuilder: knitr
 License: Artistic-2.0
+URL: https://waldronlab.github.io/enrichOmics/
+DockerImage: ludwigg/enrichomics:latest
 biocViews: Microarray, RNASeq, GeneExpression, DifferentialExpression,
     Pathways, GraphAndNetwork, Network, GeneSetEnrichment,
     NetworkEnrichment, Visualization, ReportWriting

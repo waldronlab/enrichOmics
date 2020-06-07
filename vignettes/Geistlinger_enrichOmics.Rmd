@@ -1,16 +1,26 @@
 ---
+title: Functional enrichment analysis of high-throughput omics data
+author:
+- name: Ludwig Geistlinger
+  affiliation: CUNY School of Public Health, New York, NY
+- name: Levi Waldron
+  affiliation: CUNY School of Public Health, New York, NY
+date: "`r format(Sys.time(), '%B %d, %Y')`"
 output:
-  rmarkdown::html_document:
-    highlight: pygments
-    toc: false
-    toc_depth: 3
-    fig_width: 5
 vignette: >
   %\VignetteIndexEntry{Functional enrichment analysis of high-throughput omics data}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding[utf8]{inputenc}  
+  %\VignetteEncoding{UTF-8}
+output:
+  html_document:
+    mathjax: null   
 ---
 # Functional enrichment analysis of high-throughput omics data
+
+```{r, include=FALSE}
+library(knitr)
+opts_chunk$set(out.width="100%", cache=TRUE)
+```
 
 ## Instructor names and contact information
 

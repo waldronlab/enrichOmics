@@ -13,7 +13,8 @@ Description: Overview of existing methods for enrichment analysis of gene
     assays. 
 Depends: 
     EnrichmentBrowser,
-    regioneR
+    regioneR,
+    statmod
 Suggests:
     ALL,
     BSgenome.Hsapiens.UCSC.hg19.masked,

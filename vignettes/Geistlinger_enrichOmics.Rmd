@@ -501,7 +501,7 @@ annotation package.
 
 
 ```{R}
-go.gs <- getGenesets(org="hsa", db="go", go.onto="BP", go.mode="GO.db")
+go.gs <- getGenesets(org="hsa", db="go", onto="BP", mode="GO.db")
 ```
 
 If provided a file, the function `getGenesets` parses user-defined gene sets

@@ -1,12 +1,4 @@
 ---
-title: Functional enrichment analysis of high-throughput omics data
-author:
-- name: Ludwig Geistlinger
-  affiliation: CUNY School of Public Health, New York, NY
-- name: Levi Waldron
-  affiliation: CUNY School of Public Health, New York, NY
-date: "`r format(Sys.time(), '%B %d, %Y')`"
-output:
 vignette: >
   %\VignetteIndexEntry{Functional enrichment analysis of high-throughput omics data}
   %\VignetteEngine{knitr::rmarkdown}
@@ -22,7 +14,9 @@ library(knitr)
 opts_chunk$set(out.width="100%", cache=TRUE)
 ```
 
-## Instructor names and contact information
+## Workshop information
+
+### Instructor names and contact information
 
 * Ludwig Geistlinger (<Ludwig.Geistlinger@sph.cuny.edu>)
 * Levi Waldron
@@ -30,7 +24,7 @@ opts_chunk$set(out.width="100%", cache=TRUE)
 CUNY School of Public Health
 55 W 125th St, New York, NY 10027
 
-## Workshop Description
+### Workshop Description
 
 This workshop gives an in-depth overview of existing methods for enrichment 
 analysis of gene expression data with regard to functional gene sets, pathways, 
@@ -78,7 +72,7 @@ Execution of example code and hands-on practice
 | Genomic region analysis               | 15m  |
 
 
-## Goals and objectives
+### Goals and objectives
 
 Theory:
 

@@ -9,9 +9,9 @@ output:
 ---
 # Functional enrichment analysis of high-throughput omics data
 
-```{r, include=FALSE}
+```{r, include = FALSE}
 library(knitr)
-opts_chunk$set(out.width="100%", cache=TRUE)
+opts_chunk$set(out.width = "100%", cache = TRUE)
 ```
 
 ## Workshop information
@@ -154,7 +154,7 @@ combination and exploration of results across methods.
 <img src="https://github.com/waldronlab/BrownCOBRE2018/blob/master/notebooks_day2/EnrichmentBrowserWorkflow.png?raw=true", alt="EnrichmentBrowserWorkflow image", style="width:650px">
 
 
-```{R, message=FALSE}
+```{R, message = FALSE}
 library(EnrichmentBrowser)
 ```
 
@@ -354,7 +354,7 @@ As we often have more than one probe per gene, we compute gene expression values
 as the average of the corresponding probe values.
 
 
-```{R, message=FALSE}
+```{R, message = FALSE}
 allSE <- probe2gene(all.eset) 
 head(names(allSE))
 ```
@@ -454,7 +454,7 @@ differential expression analysis based on functionality from the
 
 ```{R}
 allSE <- deAna(allSE)
-rowData(allSE, use.names=TRUE)
+rowData(allSE, use.names = TRUE)
 ```
 
 Nominal *p*-values are already corrected for multiple testing (`ADJ.PVAL`)
@@ -468,12 +468,12 @@ package. Here, we use the analysis based on *edgeR*.
 
 
 ```{R}
-airSE <- deAna(airSE, de.method="edgeR")
+airSE <- deAna(airSE, de.method = "edgeR")
 ```
 
 
 ```{R}
-rowData(airSE, use.names=TRUE)
+rowData(airSE, use.names = TRUE)
 ```
 
 *Exercise:* Compare the number of differentially expressed genes as obtained on the `airSE` with `limma/voom`, `edgeR`, and `DESeq2`. 
@@ -492,7 +492,7 @@ Here, we use the function to download all KEGG pathways for a chosen organism
 (here: \emph{Homo sapiens}) as gene sets.
 
 ```{R}
-kegg.gs <- getGenesets(org="hsa", db="kegg")
+kegg.gs <- getGenesets(org = "hsa", db = "kegg")
 ```
 
 Analogously, the function `getGenesets` can be used to retrieve GO terms of a 
@@ -501,7 +501,7 @@ annotation package.
 
 
 ```{R}
-go.gs <- getGenesets(org="hsa", db="go", onto="BP", mode="GO.db")
+go.gs <- getGenesets(org = "hsa", db = "go", onto = "BP", mode = "GO.db")
 ```
 
 If provided a file, the function `getGenesets` parses user-defined gene sets
@@ -511,7 +511,7 @@ KEGG gene sets for *Homo sapiens* containing NCBI Entrez Gene IDs.
 
 
 ```{R}
-data.dir <- system.file("extdata", package="EnrichmentBrowser")
+data.dir <- system.file("extdata", package = "EnrichmentBrowser")
 gmt.file <- file.path(data.dir, "hsa_kegg_gs.gmt")
 hsa.gs <- getGenesets(gmt.file)
 hsa.gs[1:2]
@@ -533,7 +533,7 @@ Here, we choose a significance level $\alpha = 0.2$ for demonstration.
 
 
 ```{R}
-ora.all <- sbea(method="ora", se=allSE, gs=hsa.gs, perm=0, alpha=0.2)
+ora.all <- sbea(method = "ora", se = allSE, gs = hsa.gs, perm = 0, alpha = 0.2)
 gsRanking(ora.all)
 ```
 
@@ -564,11 +564,11 @@ we first map the airway dataset to Entrez IDs.
 
 
 ```{R}
-airSE <- idMap(airSE, org="hsa", from="ENSEMBL", to="ENTREZID")
+airSE <- idMap(airSE, org = "hsa", from = "ENSEMBL", to = "ENTREZID")
 ```
 
 ```{R}
-ora.air <- sbea(method="ora", se=airSE, gs=hsa.gs, perm=0)
+ora.air <- sbea(method = "ora", se = airSE, gs = hsa.gs, perm = 0)
 gsRanking(ora.air)
 ```
 
@@ -610,7 +610,7 @@ enrichment score against it. Here, we carry out GSEA with 1000 permutations.
 
 
 ```{R}
-gsea.all <- sbea(method="gsea", se=allSE, gs=hsa.gs, perm=1000)  
+gsea.all <- sbea(method = "gsea", se = allSE, gs = hsa.gs, perm = 1000)  
 ```
 
 ```{R}
@@ -627,7 +627,7 @@ permutations having used edgeR for DE analysis.
 
 
 ```{R}
-gsea.air <- sbea(method="gsea", se=airSE, gs=hsa.gs, perm=100)  
+gsea.air <- sbea(method = "gsea", se = airSE, gs = hsa.gs, perm = 100)  
 ```
 
 While it might be in some cases necessary to apply permutation-based GSEA for
@@ -637,7 +637,7 @@ ROtAtion gene Set Testing (ROAST), which uses rotation instead of permutation
 
 
 ```{R}
-roast.air <- sbea(method="roast", se=airSE, gs=hsa.gs)
+roast.air <- sbea(method = "roast", se = airSE, gs = hsa.gs)
 gsRanking(roast.air)  
 ```
 
@@ -674,7 +674,7 @@ A basic workaround is to compile a network from regulations in pathway databases
 such as KEGG.
 
 ```{R}
-hsa.grn <- compileGRN(org="hsa", db="kegg")
+hsa.grn <- compileGRN(org = "hsa", db = "kegg")
 head(hsa.grn)
 ```
 
@@ -686,7 +686,7 @@ topology in combination with ORA.
 
 
 ```{R}
-spia.all <- nbea(method="spia", se=allSE, gs=hsa.gs, grn=hsa.grn, alpha=0.2)
+spia.all <- nbea(method = "spia", se = allSE, gs = hsa.gs, grn = hsa.grn, alpha = 0.2)
 gsRanking(spia.all)
 ```
 
@@ -697,7 +697,7 @@ the observed expression data
 
 
 ```{R}
-ggea.all <- nbea(method="ggea", se=allSE, gs=hsa.gs, grn=hsa.grn)
+ggea.all <- nbea(method = "ggea", se = allSE, gs = hsa.gs, grn = hsa.grn)
 gsRanking(ggea.all)
 ```
 
@@ -758,7 +758,7 @@ By recomputing the overlap with the functional features in each permutation,
 statistical significance of the observed overlap can be assessed.
 
 
-```{R, message=FALSE}
+```{R, message = FALSE}
 library(regioneR)
 library(BSgenome.Hsapiens.UCSC.hg19.masked)
 ```
@@ -775,8 +775,10 @@ them to the set of canonical chromosomes 1-23, *X*, and *Y*.
 
 
 ```{R}
-cpgHMM <- toGRanges("http://www.haowulab.org/software/makeCGI/model-based-cpg-islands-hg19.txt")
-cpgHMM <- filterChromosomes(cpgHMM, chr.type="canonical")
+cpgHMM <- read.delim("http://www.haowulab.org/software/makeCGI/model-based-cpg-islands-hg19.txt")
+cpgHMM <- makeGRangesFromDataFrame(cpgHMM, keep.extra.columns = TRUE)
+genome(cpgHMM) <- "hg19"
+cpgHMM <- filterChromosomes(cpgHMM, chr.type = "canonical")
 cpgHMM <- sort(cpgHMM)
 cpgHMM
 ```
@@ -786,8 +788,10 @@ available from [UCSC](https://genome.ucsc.edu/):
 
 
 ```{R}
-promoters <- toGRanges("http://gattaca.imppc.org/regioner/data/UCSC.promoters.hg19.bed")
-promoters <- filterChromosomes(promoters, chr.type="canonical")
+promoters <- read.delim("http://gattaca.imppc.org/regioner/data/UCSC.promoters.hg19.bed")
+promoters <- makeGRangesFromDataFrame(promoters, keep.extra.columns = TRUE)
+genome(promoters) <- "hg19"
+promoters <- filterChromosomes(promoters, chr.type = "canonical")
 promoters <- sort(promoters)
 promoters
 ```
@@ -798,21 +802,23 @@ complete region set should be used (which, however, runs considerably longer).
 
 
 ```{R}
-cpg <- cpgHMM[seqnames(cpgHMM) %in% c("chr21", "chr22")]
-prom <- promoters[seqnames(promoters) %in% c("chr21", "chr22")]
+cpg <- subset(cpgHMM, seqnames %in% c("chr21", "chr22"))
+prom <- subset(promoters, seqnames %in% c("chr21", "chr22"))
 ```
 
 Now, we are applying an overlap permutation test with 100 permutations
-(`ntimes=100`), while maintaining chromosomal distribution of the CpG island
-region set (`per.chromosome=TRUE`). Furthermore, we use the option
-`count.once=TRUE` to count an overlapping CpG island only once, even if it
+(`ntimes = 100`), while maintaining chromosomal distribution of the CpG island
+region set (`per.chromosome = TRUE`). Furthermore, we use the option
+`count.once = TRUE` to count an overlapping CpG island only once, even if it
 overlaps with 2 or more promoters. 
 
 Note that we use 100 permutations for demonstration only. 
 To draw robust conclusions a minimum of 1000 permutations should be carried out.
 
 ```{R}
-res <- overlapPermTest(cpg, prom, genome="hg19", ntimes=100, per.chromosome=TRUE, count.once=TRUE)
+res <- overlapPermTest(cpg, prom, 
+                       genome = "hg19", ntimes = 100,
+                       per.chromosome = TRUE, count.once = TRUE)
 res
 ```
 
@@ -824,8 +830,8 @@ The resulting permutation *p*-value indicates a significant enrichment. Out of
 the `r length(cpg)` CpG islands, `r res[[1]]$observed` overlap with at least one
 promoter. In contrast, when repeatedly drawing random regions matching the CpG
 islands in size and chromosomal distribution, the mean number of overlapping
-regions across permutations was `r round(mean(res[[1]]$permuted), digits=1)` 
-$\pm$ `r round(sd(res[[1]]$permuted), digits=1)`. 
+regions across permutations was `r round(mean(res[[1]]$permuted), digits = 1)` 
+$\pm$ `r round(sd(res[[1]]$permuted), digits = 1)`. 
 
 Note #1: The function `regioneR::permTest` allows to incorporate user-defined
 functions for randomizing regions and evaluating additional measures of overlap

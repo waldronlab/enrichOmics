@@ -1,4 +1,10 @@
+![](https://github.com/waldronlab/enrichOmics/workflows/.github/workflows/basic_checks.yaml/badge.svg)
+
 # Functional enrichment analysis of high-throughput omics data
+
+[Workshop website](https://waldronlab.github.io/enrichOmics)
+
+[Docker image](https://hub.docker.com/repository/docker/ludwigg/enrichomics)
 
 # Instructor(s) name(s) and contact information
 
@@ -21,8 +27,6 @@ It will provide code and hands-on practice of all necessary steps for differenti
  expression analysis, gene set- and network-based enrichment analysis, and 
 identification of enriched genomic regions and regulatory elements, along with 
 visualization and exploration of results. 
-A previous well-attended (>50 participants) version of this workshop was presented at Bioc2017 
-(https://www.bioconductor.org/help/course-materials/2017/BioC2017/Day1/Workshops/OmicsData/doc/enrichOmics.html).
 
 ## Pre-requisites
 

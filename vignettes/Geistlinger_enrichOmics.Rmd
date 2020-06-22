@@ -478,6 +478,20 @@ rowData(airSE, use.names = TRUE)
 
 *Exercise:* Compare the number of differentially expressed genes as obtained on the `airSE` with `limma/voom`, `edgeR`, and `DESeq2`. 
 
+```{r}
+getDE <- function(se, method)
+{
+    message(method)
+    se <- deAna(se, de.method = method)
+    nr.de <- sum(rowData(se)$ADJ.PVAL < 0.05)
+    return(nr.de)
+}
+
+getDE(airSE, method = "edgeR")
+
+de.methods <- c("limma", "edgeR", "DESeq2")
+sapply(de.methods, getDE, se = airSE)
+```
 
 ## Gene sets
 

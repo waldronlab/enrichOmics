@@ -92,6 +92,24 @@ Practice:
 * Network-based enrichment analysis
 * Genomic region enrichment analysis
 
+### Relevant literature
+
+- Geistlinger L, Csaba G, Zimmer R.
+[Bioconductor's EnrichmentBrowser: seamless navigation through combined results of set- & network-based enrichment analysis](https://doi.org/10.1186/s12859-016-0884-1).
+_BMC Bioinformatics_, 17:45, 2016.
+
+- Geistlinger L, Csaba G, Santarelli M, Ramos M, Schiffer L, Turaga N, Law C, Davis S, Carey V, Morgan M, Zimmer R, Waldron L.
+[Toward a gold standard for benchmarking gene set enrichment analysis](https://doi.org/10.1093/bib/bbz158).
+_Brief Bioinform_, 2020.
+
+- Geistlinger L, Csaba G, Küffner R, Mulder N, Zimmer R.
+[From sets to graphs: towards a realistic enrichment analysis of transcriptomic systems](https://doi.org/10.1093/bioinformatics/btr228).
+_Bioinformatics_, 27(13):i366-73, 2011.
+
+- Geistlinger L, Csaba G, Dirmeier S, Küffner R, Zimmer R.
+[A comprehensive gene regulatory network for the diauxic shift in Saccharomyces cerevisiae](https://doi.org/10.1093/nar/gkt631).
+_Nucleic Acids Res_, 41(18):8452-63, 2013.
+
 ## Where does it all come from?
 
 Test whether known biological functions or processes are over-represented

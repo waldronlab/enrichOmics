@@ -58,7 +58,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="Geistlinger_enrichOmics_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip></h1>
@@ -171,6 +171,16 @@
 <li>Functional class scoring &amp; permutation testing</li>
 <li>Network-based enrichment analysis</li>
 <li>Genomic region enrichment analysis</li>
+</ul>
+</div>
+<div id="relevant-literature" class="section level3">
+<h3 class="hasAnchor">
+<a href="#relevant-literature" class="anchor"></a>Relevant literature</h3>
+<ul>
+<li><p>Geistlinger L, Csaba G, Zimmer R. <a href="https://doi.org/10.1186/s12859-016-0884-1">Bioconductor’s EnrichmentBrowser: seamless navigation through combined results of set- &amp; network-based enrichment analysis</a>. <em>BMC Bioinformatics</em>, 17:45, 2016.</p></li>
+<li><p>Geistlinger L, Csaba G, Santarelli M, Ramos M, Schiffer L, Turaga N, Law C, Davis S, Carey V, Morgan M, Zimmer R, Waldron L. <a href="https://doi.org/10.1093/bib/bbz158">Toward a gold standard for benchmarking gene set enrichment analysis</a>. <em>Brief Bioinform</em>, 2020.</p></li>
+<li><p>Geistlinger L, Csaba G, Küffner R, Mulder N, Zimmer R. <a href="https://doi.org/10.1093/bioinformatics/btr228">From sets to graphs: towards a realistic enrichment analysis of transcriptomic systems</a>. <em>Bioinformatics</em>, 27(13):i366-73, 2011.</p></li>
+<li><p>Geistlinger L, Csaba G, Dirmeier S, Küffner R, Zimmer R. <a href="https://doi.org/10.1093/nar/gkt631">A comprehensive gene regulatory network for the diauxic shift in Saccharomyces cerevisiae</a>. <em>Nucleic Acids Res</em>, 41(18):8452-63, 2013.</p></li>
 </ul>
 </div>
 </div>
@@ -461,31 +471,31 @@
 <div class="sourceCode" id="cb49"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/eaBrowse.html">eaBrowse</a></span>(<span class="no">ora.all</span>)</pre></body></html></div>
 <pre><code>## Warning in file.rename(from = pv.out, to = img.file): cannot rename file '/__w/
 ## enrichOmics/enrichOmics/vignettes/hsa05202.kpath.png' to '/github/home/.local/
-## share/EnrichmentBrowser/results/Mon_Jun22_2020_194738/hsa05202_kpath.png',
+## share/EnrichmentBrowser/results/Tue_Jun23_2020_162203/hsa05202_kpath.png',
 ## reason 'Invalid cross-device link'</code></pre>
 <pre><code>## Warning in file.rename(from = pv.out, to = img.file): cannot rename file '/__w/
 ## enrichOmics/enrichOmics/vignettes/hsa05412.kpath.png' to '/github/home/.local/
-## share/EnrichmentBrowser/results/Mon_Jun22_2020_194738/hsa05412_kpath.png',
+## share/EnrichmentBrowser/results/Tue_Jun23_2020_162203/hsa05412_kpath.png',
 ## reason 'Invalid cross-device link'</code></pre>
 <pre><code>## Warning in file.rename(from = pv.out, to = img.file): cannot rename file '/__w/
 ## enrichOmics/enrichOmics/vignettes/hsa05144.kpath.png' to '/github/home/.local/
-## share/EnrichmentBrowser/results/Mon_Jun22_2020_194738/hsa05144_kpath.png',
+## share/EnrichmentBrowser/results/Tue_Jun23_2020_162203/hsa05144_kpath.png',
 ## reason 'Invalid cross-device link'</code></pre>
 <pre><code>## Warning in file.rename(from = pv.out, to = img.file): cannot rename file '/__w/
 ## enrichOmics/enrichOmics/vignettes/hsa04670.kpath.png' to '/github/home/.local/
-## share/EnrichmentBrowser/results/Mon_Jun22_2020_194738/hsa04670_kpath.png',
+## share/EnrichmentBrowser/results/Tue_Jun23_2020_162203/hsa04670_kpath.png',
 ## reason 'Invalid cross-device link'</code></pre>
 <pre><code>## Warning in file.rename(from = pv.out, to = img.file): cannot rename file '/__w/
 ## enrichOmics/enrichOmics/vignettes/hsa05100.kpath.png' to '/github/home/.local/
-## share/EnrichmentBrowser/results/Mon_Jun22_2020_194738/hsa05100_kpath.png',
+## share/EnrichmentBrowser/results/Tue_Jun23_2020_162203/hsa05100_kpath.png',
 ## reason 'Invalid cross-device link'</code></pre>
 <pre><code>## Warning in file.rename(from = pv.out, to = img.file): cannot rename file '/__w/
 ## enrichOmics/enrichOmics/vignettes/hsa04622.kpath.png' to '/github/home/.local/
-## share/EnrichmentBrowser/results/Mon_Jun22_2020_194738/hsa04622_kpath.png',
+## share/EnrichmentBrowser/results/Tue_Jun23_2020_162203/hsa04622_kpath.png',
 ## reason 'Invalid cross-device link'</code></pre>
 <pre><code>## Warning in file.rename(from = pv.out, to = img.file): cannot rename file '/__w/
 ## enrichOmics/enrichOmics/vignettes/hsa05130.kpath.png' to '/github/home/.local/
-## share/EnrichmentBrowser/results/Mon_Jun22_2020_194738/hsa05130_kpath.png',
+## share/EnrichmentBrowser/results/Tue_Jun23_2020_162203/hsa05130_kpath.png',
 ## reason 'Invalid cross-device link'</code></pre>
 <p>The resulting summary page includes for each significant gene set</p>
 <ul>
@@ -878,7 +888,7 @@
 <span class="no">res</span></pre></body></html></div>
 <pre><code>## $numOverlaps
 ## P-value: 0.0099009900990099
-## Z-score: 47.9164
+## Z-score: 40.076
 ## Number of iterations: 100
 ## Alternative: greater
 ## Evaluation of the original region set: 719
@@ -889,8 +899,8 @@
 ## [1] "permTestResultsList"</code></pre>
 <div class="sourceCode" id="cb107"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">res</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">permuted</span>)</pre></body></html></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   141.0   164.0   170.5   170.8   179.0   196.0</code></pre>
-<p>The resulting permutation <em>p</em>-value indicates a significant enrichment. Out of the 2859 CpG islands, 719 overlap with at least one promoter. In contrast, when repeatedly drawing random regions matching the CpG islands in size and chromosomal distribution, the mean number of overlapping regions across permutations was 170.8 <span class="math inline">\(\pm\)</span> 11.4.</p>
+##   146.0   162.0   172.0   172.3   181.2   214.0</code></pre>
+<p>The resulting permutation <em>p</em>-value indicates a significant enrichment. Out of the 2859 CpG islands, 719 overlap with at least one promoter. In contrast, when repeatedly drawing random regions matching the CpG islands in size and chromosomal distribution, the mean number of overlapping regions across permutations was 172.3 <span class="math inline">\(\pm\)</span> 13.6.</p>
 <p>Note #1: The function <code><a href="https://rdrr.io/pkg/regioneR/man/permTest.html">regioneR::permTest</a></code> allows to incorporate user-defined functions for randomizing regions and evaluating additional measures of overlap such as total genomic size in bp.</p>
 <p>Note #2: The <a href="http://bioconductor.org/packages/LOLA">LOLA</a> package implements a genomic region ORA, which assesses genomic region overlap based on the hypergeometric distribution using a library of pre-defined functional region sets.</p>
 </div>

@@ -169,7 +169,9 @@ established Bioconductor packages for gene expression data analysis. It
 integrates a wide range of gene set enrichment analysis methods and facilitates
 combination and exploration of results across methods.
 
-<img src="https://github.com/waldronlab/BrownCOBRE2018/blob/master/notebooks_day2/EnrichmentBrowserWorkflow.png?raw=true", alt="EnrichmentBrowserWorkflow image", style="width:650px">
+```{r, echo=FALSE}
+knitr::include_graphics("EnrichmentBrowserWorkflow.png")
+```
 
 
 ```{R, message = FALSE}
@@ -496,21 +498,6 @@ rowData(airSE, use.names = TRUE)
 
 *Exercise:* Compare the number of differentially expressed genes as obtained on the `airSE` with `limma/voom`, `edgeR`, and `DESeq2`. 
 
-```{r}
-getDE <- function(se, method)
-{
-    message(method)
-    se <- deAna(se, de.method = method)
-    nr.de <- sum(rowData(se)$ADJ.PVAL < 0.05)
-    return(nr.de)
-}
-
-getDE(airSE, method = "edgeR")
-
-de.methods <- c("limma", "edgeR", "DESeq2")
-sapply(de.methods, getDE, se = airSE)
-```
-
 ## Gene sets
 
 We are now interested in whether pre-defined sets of genes that are known to 
@@ -532,7 +519,7 @@ selected ontology (here: biological process, BP) as defined in the *GO.db*
 annotation package.
 
 
-```{R}
+```{R, message = FALSE}
 go.gs <- getGenesets(org = "hsa", db = "go", onto = "BP", mode = "GO.db")
 ```
 
@@ -573,8 +560,9 @@ Such a ranked list is the standard output of most existing enrichment tools.
 Using the `eaBrowse` function creates a HTML summary from which each
 gene set can be inspected in more detail.
 
-<img src="https://github.com/waldronlab/BrownCOBRE2018/blob/master/notebooks_day2/EnrichmentBrowserNavigation.png?raw=true", alt="EnrichmentBrowserNavigation image", style="width:600px">
-
+```{r, echo=FALSE}
+knitr::include_graphics("EnrichmentBrowserNavigation.png")
+```
 
 ```{R, message=FALSE}
 eaBrowse(ora.all)
@@ -770,7 +758,9 @@ large-scale detection of variable and regulatory genomic regions, e.g. single
 nucleotide polymorphisms, copy number variations, and transcription factor
 binding sites. 
 
-<img src="https://github.com/waldronlab/BrownCOBRE2018/blob/master/notebooks_day2/ENCODE.png?raw=true", alt="ENCODE image", style="width:600px">
+```{r, echo=FALSE}
+knitr::include_graphics("ENCODE.png")
+```
 
 Such experimentally-derived genomic region sets are raising similar questions
 regarding functional enrichment as in gene expression data analysis. 

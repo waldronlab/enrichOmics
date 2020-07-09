@@ -318,6 +318,20 @@ reducing the outcome to gene sets accumulating evidence from different methods
 [Geistlinger et al., 2016](https://doi.org/10.1186/s12859-016-0884-1),
 [Alhamdoosh et al., 2017](https://doi.org/10.1093/bioinformatics/btw623).
 
+**Guidelines for input and method selection**
+
+Based on a comprehensive assessment of 10 major enrichment methods, we recently
+identified significant differences in runtime and applicability to RNA-seq data, 
+fraction of enriched gene sets depending on the null hypothesis tested, and detection 
+of relevant processes 
+[Geistlinger et al., 2020]().
+
+Based on these results, we make practical recommendations on how methods originally 
+developed for microarray data can efficiently be applied to RNA-seq data, how to 
+interpret results depending on the type of gene set test conducted and which
+methods are best suited to effectively prioritize gene sets with high phenotype relevance:
+
+
 ## Data types
 
 Although RNA-seq (read count data) has become the *de facto* standard for
@@ -474,7 +488,7 @@ differential expression analysis based on functionality from the
 
 ```{R}
 allSE <- deAna(allSE)
-rowData(allSE, use.names = TRUE)
+rowData(allSE)
 ```
 
 Nominal *p*-values are already corrected for multiple testing (`ADJ.PVAL`)
@@ -493,7 +507,7 @@ airSE <- deAna(airSE, de.method = "edgeR")
 
 
 ```{R}
-rowData(airSE, use.names = TRUE)
+rowData(airSE)
 ```
 
 *Exercise:* Compare the number of differentially expressed genes as obtained on the `airSE` with `limma/voom`, `edgeR`, and `DESeq2`. 
@@ -512,6 +526,7 @@ Here, we use the function to download all KEGG pathways for a chosen organism
 
 ```{R}
 kegg.gs <- getGenesets(org = "hsa", db = "kegg")
+kegg.gs[1:2]
 ```
 
 Analogously, the function `getGenesets` can be used to retrieve GO terms of a 
@@ -521,6 +536,7 @@ annotation package.
 
 ```{R, message = FALSE}
 go.gs <- getGenesets(org = "hsa", db = "go", onto = "BP", mode = "GO.db")
+go.gs[1:2]
 ```
 
 If provided a file, the function `getGenesets` parses user-defined gene sets
@@ -536,8 +552,34 @@ hsa.gs <- getGenesets(gmt.file)
 hsa.gs[1:2]
 ```
 
-See also the [MSigDb](http://software.broadinstitute.org/gsea/msigdb) for
-additional gene set collections.
+Note #1: Gene set collections for 11 different species from the  
+[Molecular Signatures Database (MSigDB)](http://software.broadinstitute.org/gsea/msigdb/collections.jsp) can be obtained using `getGenesets` with `db = "msigdb"`.
+For example, the \textbf{H}allmark gene set collection can be obtained from MSigDB via: 
+
+```{r msigdb}
+hall.gs <- getGenesets(org = "hsa", db = "msigdb", cat = "H") 
+hall.gs[1:2]
+```
+
+Note #2: Gene set libraries from the comprehensive 
+[Enrichr](https://amp.pharm.mssm.edu/Enrichr/#stats) collection for 5 different species 
+can be obtained using `getGenesets` with `db = "enrichr"`.
+For example, gene sets based on transcription factor interactions can be obtained
+from Enrichr via:
+
+```{r enrichr}
+tfppi.gs <- getGenesets(org = "hsa", db = "enrichr", lib = "Transcription_Factor_PPIs")
+tfppi.gs[1:2]
+```
+
+Note #3: The `idMap` function can be used to map gene sets from NCBI Entrez Gene
+IDs to other common gene ID types such as ENSEMBL gene IDs or HGNC symbols.\\
+For example, to map the gene sets from Entrez Gene IDs to gene symbols:
+
+```{r idmapGS}
+hsa.gs.sym <- idMap(hsa.gs, org = "hsa", from = "ENTREZID", to = "SYMBOL")
+hsa.gs.sym[1:2]
+```
 
 ## GO/KEGG overrepresentation analysis
 
@@ -638,16 +680,25 @@ gsRanking(gsea.all)
 ```
 
 As GSEA's permutation procedure involves re-computation of per-gene DE
-statistics, adaptations are necessary for RNA-seq. The EnrichmentBrowser
-implements an accordingly adapted version of GSEA, which allows incorporation
-of limma/voom, edgeR, or DESeq2 for repeated DE re-computation within GSEA.
-However, this is computationally intensive (for limma/voom the least, for
-DESeq2 the most). Note the relatively long running times for only 100
-permutations having used edgeR for DE analysis.
+statistics, adaptations are necessary for RNA-seq. 
+When analyzing RNA-seq datasets with expression values given as logTPMs
+(or logRPKMs / logFPKMs), the available set-based enrichment methods can be
+applied as for microarray data.
+However, when given raw read counts as for the airway dataset, we recommend to
+first apply a variance-stabilizing transformation such as `voom` to
+arrive at library-size normalized logCPMs. 
 
+```{r vst}
+airSE <- normalize(airSE, norm.method = "vst")
+```
+
+The mean-variance relationship of the transformed data is similar to what is
+observed for microarray data, simplifying the application of legacy enrichment
+methods such as GSEA and PADOG to RNA-seq data, and enable the use of fast and
+established methods.
 
 ```{R}
-gsea.air <- sbea(method = "gsea", se = airSE, gs = hsa.gs, perm = 100)  
+gsea.air <- sbea(method = "gsea", se = airSE, gs = hsa.gs)  
 ```
 
 While it might be in some cases necessary to apply permutation-based GSEA for

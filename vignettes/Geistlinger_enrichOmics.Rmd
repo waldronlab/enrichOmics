@@ -323,14 +323,61 @@ reducing the outcome to gene sets accumulating evidence from different methods
 Based on a comprehensive assessment of 10 major enrichment methods, we recently
 identified significant differences in runtime and applicability to RNA-seq data, 
 fraction of enriched gene sets depending on the null hypothesis tested, and detection 
-of relevant processes 
-[Geistlinger et al., 2020]().
+of relevant processes [Geistlinger et al., 2020](https://doi.org/10.1093/bib/bbz158).
 
 Based on these results, we make practical recommendations on how methods originally 
 developed for microarray data can efficiently be applied to RNA-seq data, how to 
 interpret results depending on the type of gene set test conducted and which
 methods are best suited to effectively prioritize gene sets with high phenotype relevance:
 
+For the exploratory analysis of *simple gene lists*, we recommend ORA given its 
+ease of applicability, fast runtime and evident relevance of resulting gene set
+rankings, provided that input gene list and reference gene list are chosen carefully 
+and remembering ORA’s propensity for type I error rate inflation when genes tend
+to be co-expressed within sets.
+
+For the analysis of *pre-ranked gene lists* accompanied by gene scores such as 
+fold changes, alternatives to ORA such as 
+[pre-ranked GSEA](http://bioconductor.org/packages/fgsea) 
+or 
+[pre-ranked CAMERA](http://web.mit.edu/~r/current/arch/i386_linux26/lib/R/library/limma/html/camera.html)
+exist.
+
+For expression-based enrichment analysis on the *full expression matrix*, 
+we recommend providing
+normalized log2 intensities for microarray data, and logTPMs (or logRPKMs / logFPKMs)
+for RNA-seq data.
+When given raw read counts, we recommend to apply a variance-stabilizing transformation
+such as [voom](https://doi.org/10.1186/gb-2014-15-2-r29) to arrive at library-size 
+normalized logCPMs.
+
+If the question of interest is to test for association of any gene in the set with
+the phenotype (*self-contained* null hypothesis), we recommend ROAST or GSVA that 
+both test a *directional* hypothesis (genes in the set tend to be either
+predominantly up- or down-regulated).
+Both methods can be applied for simple or extended experimental designs, where
+ROAST is the more natural choice for the comparison of sample groups and also
+allows one to test a *mixed* hypothesis (genes in the set tend to be
+differentially expressed, regardless of the direction).
+The main strength of GSVA lies in its capabilities for analyzing single samples.
+
+If the question of interest is to test for excess of differential expression in
+a gene set relative to genes outside the set (*competitive* null hypothesis), which
+we believe comes closest to the expectations and intuition of most end users when
+performing GSEA, we recommend PADOG, which is slower to run but resolves major
+shortcomings of ORA, and has desirable properties for the analyzed criteria and
+when compared to other competitive methods.
+However, PADOG is limited to testing a mixed hypothesis in a comparison of two
+sample groups, optionally including paired samples or sample batches.
+Therefore, we recommend the highly customizable SAFE for testing a directional
+hypothesis or in situations of more complex experimental designs such as
+comparisons between multiple groups, continuous phenotypes or the presence of
+covariates.
+
+See also [Geistlinger et al., 2020](https://doi.org/10.1093/bib/bbz158) for the 
+results of the benchmarking study and the 
+[GSEABenchmarkeR](http://bioconductor.org/packages/GSEABenchmarkeR) package for
+a general framework for reproducible benchmarking of gene set enrichment methods.
 
 ## Data types
 
@@ -567,9 +614,8 @@ can be obtained using `getGenesets` with `db = "enrichr"`.
 For example, gene sets based on transcription factor interactions can be obtained
 from Enrichr via:
 
-```{r enrichr}
+```{r enrichr, eval = FALSE}
 tfppi.gs <- getGenesets(org = "hsa", db = "enrichr", lib = "Transcription_Factor_PPIs")
-tfppi.gs[1:2]
 ```
 
 Note #3: The `idMap` function can be used to map gene sets from NCBI Entrez Gene

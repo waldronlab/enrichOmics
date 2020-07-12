@@ -601,9 +601,9 @@ hsa.gs[1:2]
 
 Note #1: Gene set collections for 11 different species from the  
 [Molecular Signatures Database (MSigDB)](http://software.broadinstitute.org/gsea/msigdb/collections.jsp) can be obtained using `getGenesets` with `db = "msigdb"`.
-For example, the \textbf{H}allmark gene set collection can be obtained from MSigDB via: 
+For example, the *H*allmark gene set collection can be obtained from MSigDB via: 
 
-```{r msigdb}
+```{r msigdb, message = FALSE}
 hall.gs <- getGenesets(org = "hsa", db = "msigdb", cat = "H") 
 hall.gs[1:2]
 ```

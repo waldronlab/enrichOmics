@@ -935,7 +935,7 @@ Note that we use 100 permutations for demonstration only.
 To draw robust conclusions a minimum of 1000 permutations should be carried out.
 
 ```{R}
-res <- overlapPermTest(cpg, prom, 
+res <- overlapPermTest(cpg, prom, mask = NA,
                        genome = "hg19", ntimes = 100,
                        per.chromosome = TRUE, count.once = TRUE)
 res

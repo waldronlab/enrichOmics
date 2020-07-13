@@ -457,13 +457,9 @@
 ## [49] "64135"  "64343"  "6885"   "7124"   "7186"   "7187"   "7189"   "7706"  
 ## [57] "79132"  "79671"  "80143"  "841"    "843"    "8517"   "8717"   "8737"  
 ## [65] "8772"   "9140"   "9474"   "9636"   "9641"   "9755"</code></pre>
-<p>Note #1: Gene set collections for 11 different species from the<br><a href="http://software.broadinstitute.org/gsea/msigdb/collections.jsp">Molecular Signatures Database (MSigDB)</a> can be obtained using <code>getGenesets</code> with <code>db = "msigdb"</code>. For example, the allmark gene set collection can be obtained from MSigDB via:</p>
-<div class="sourceCode" id="cb37"><html><body><pre class="r"><span class="no">hall.gs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/getGenesets.html">getGenesets</a></span>(<span class="kw">org</span> <span class="kw">=</span> <span class="st">"hsa"</span>, <span class="kw">db</span> <span class="kw">=</span> <span class="st">"msigdb"</span>, <span class="kw">cat</span> <span class="kw">=</span> <span class="st">"H"</span>)</pre></body></html></div>
-<pre><code>## Corresponding software package not found: msigdbr
-## Make sure that you have it installed.</code></pre>
-<pre><code>## Bioconductor version 3.12 (BiocManager 1.30.10), R 4.0.0 (2020-04-24)</code></pre>
-<pre><code>## Installing package(s) 'msigdbr'</code></pre>
-<div class="sourceCode" id="cb41"><html><body><pre class="r"><span class="no">hall.gs</span>[<span class="fl">1</span>:<span class="fl">2</span>]</pre></body></html></div>
+<p>Note #1: Gene set collections for 11 different species from the<br><a href="http://software.broadinstitute.org/gsea/msigdb/collections.jsp">Molecular Signatures Database (MSigDB)</a> can be obtained using <code>getGenesets</code> with <code>db = "msigdb"</code>. For example, the <em>H</em>allmark gene set collection can be obtained from MSigDB via:</p>
+<div class="sourceCode" id="cb37"><html><body><pre class="r"><span class="no">hall.gs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/getGenesets.html">getGenesets</a></span>(<span class="kw">org</span> <span class="kw">=</span> <span class="st">"hsa"</span>, <span class="kw">db</span> <span class="kw">=</span> <span class="st">"msigdb"</span>, <span class="kw">cat</span> <span class="kw">=</span> <span class="st">"H"</span>)
+<span class="no">hall.gs</span>[<span class="fl">1</span>:<span class="fl">2</span>]</pre></body></html></div>
 <pre><code>## $M5890_HALLMARK_TNFA_SIGNALING_VIA_NFKB
 ##   [1] "19"     "57007"  "374"    "467"    "490"    "2683"   "9334"   "597"   
 ##   [9] "602"    "604"    "8553"   "329"    "330"    "650"    "694"    "7832"  
@@ -518,11 +514,11 @@
 ## [185] "25976"  "8277"   "55076"  "7128"   "7162"   "7163"   "7167"   "8459"  
 ## [193] "7360"   "7422"   "7428"   "7436"   "26118"  "7511"   "7538"   "23036"</code></pre>
 <p>Note #2: Gene set libraries from the comprehensive <a href="https://amp.pharm.mssm.edu/Enrichr/#stats">Enrichr</a> collection for 5 different species can be obtained using <code>getGenesets</code> with <code>db = "enrichr"</code>. For example, gene sets based on transcription factor interactions can be obtained from Enrichr via:</p>
-<div class="sourceCode" id="cb43"><html><body><pre class="r"><span class="no">tfppi.gs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/getGenesets.html">getGenesets</a></span>(<span class="kw">org</span> <span class="kw">=</span> <span class="st">"hsa"</span>, <span class="kw">db</span> <span class="kw">=</span> <span class="st">"enrichr"</span>, <span class="kw">lib</span> <span class="kw">=</span> <span class="st">"Transcription_Factor_PPIs"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb39"><html><body><pre class="r"><span class="no">tfppi.gs</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/getGenesets.html">getGenesets</a></span>(<span class="kw">org</span> <span class="kw">=</span> <span class="st">"hsa"</span>, <span class="kw">db</span> <span class="kw">=</span> <span class="st">"enrichr"</span>, <span class="kw">lib</span> <span class="kw">=</span> <span class="st">"Transcription_Factor_PPIs"</span>)</pre></body></html></div>
 <p>Note #3: The <code>idMap</code> function can be used to map gene sets from NCBI Entrez Gene IDs to other common gene ID types such as ENSEMBL gene IDs or HGNC symbols.\ For example, to map the gene sets from Entrez Gene IDs to gene symbols:</p>
-<div class="sourceCode" id="cb44"><html><body><pre class="r"><span class="no">hsa.gs.sym</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/idMap.html">idMap</a></span>(<span class="no">hsa.gs</span>, <span class="kw">org</span> <span class="kw">=</span> <span class="st">"hsa"</span>, <span class="kw">from</span> <span class="kw">=</span> <span class="st">"ENTREZID"</span>, <span class="kw">to</span> <span class="kw">=</span> <span class="st">"SYMBOL"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb40"><html><body><pre class="r"><span class="no">hsa.gs.sym</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/idMap.html">idMap</a></span>(<span class="no">hsa.gs</span>, <span class="kw">org</span> <span class="kw">=</span> <span class="st">"hsa"</span>, <span class="kw">from</span> <span class="kw">=</span> <span class="st">"ENTREZID"</span>, <span class="kw">to</span> <span class="kw">=</span> <span class="st">"SYMBOL"</span>)</pre></body></html></div>
 <pre><code>## Excluded 3 from.IDs without a corresponding to.ID</code></pre>
-<div class="sourceCode" id="cb46"><html><body><pre class="r"><span class="no">hsa.gs.sym</span>[<span class="fl">1</span>:<span class="fl">2</span>]</pre></body></html></div>
+<div class="sourceCode" id="cb42"><html><body><pre class="r"><span class="no">hsa.gs.sym</span>[<span class="fl">1</span>:<span class="fl">2</span>]</pre></body></html></div>
 <pre><code>## $hsa05416_Viral_myocarditis
 ##  [1] "CXADR"    "CD55"     "DAG1"     "DMD"      "EIF4G1"   "EIF4G2"  
 ##  [7] "ABL1"     "FYN"      "ABL2"     "HLA-A"    "HLA-B"    "HLA-C"   
@@ -550,7 +546,7 @@
 <h2 class="hasAnchor">
 <a href="#gokegg-overrepresentation-analysis" class="anchor"></a>GO/KEGG overrepresentation analysis</h2>
 <p>A variety of gene set analysis methods have been proposed <a href="https://doi.org/10.1371/journal.pcbi.1002375">Khatri et al., 2012</a>. The most basic, yet frequently used, method is the over-representation analysis (ORA) with gene sets defined according to GO or KEGG. As outlined in the first section, ORA tests the overlap between DE genes (typically DE <em>p</em>-value &lt; 0.05) and genes in a gene set based on the hypergeometric distribution. Here, we choose a significance level <span class="math inline">\(\alpha = 0.2\)</span> for demonstration.</p>
-<div class="sourceCode" id="cb48"><html><body><pre class="r"><span class="no">ora.all</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/sbea.html">sbea</a></span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"ora"</span>, <span class="kw">se</span> <span class="kw">=</span> <span class="no">allSE</span>, <span class="kw">gs</span> <span class="kw">=</span> <span class="no">hsa.gs</span>, <span class="kw">perm</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">0.2</span>)
+<div class="sourceCode" id="cb44"><html><body><pre class="r"><span class="no">ora.all</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/sbea.html">sbea</a></span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"ora"</span>, <span class="kw">se</span> <span class="kw">=</span> <span class="no">allSE</span>, <span class="kw">gs</span> <span class="kw">=</span> <span class="no">hsa.gs</span>, <span class="kw">perm</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">0.2</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/eaBrowse.html">gsRanking</a></span>(<span class="no">ora.all</span>)</pre></body></html></div>
 <pre><code>## DataFrame with 7 rows and 4 columns
 ##                 GENE.SET  NR.GENES NR.SIG.GENES      PVAL
@@ -564,34 +560,34 @@
 ## 7 hsa05130_Pathogenic_..        43            5    0.1840</code></pre>
 <p>Such a ranked list is the standard output of most existing enrichment tools. Using the <code>eaBrowse</code> function creates a HTML summary from which each gene set can be inspected in more detail.</p>
 <p><img src="EnrichmentBrowserNavigation.png" width="100%"></p>
-<div class="sourceCode" id="cb50"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/eaBrowse.html">eaBrowse</a></span>(<span class="no">ora.all</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb46"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/eaBrowse.html">eaBrowse</a></span>(<span class="no">ora.all</span>)</pre></body></html></div>
 <pre><code>## Warning in file.rename(from = pv.out, to = img.file): cannot rename file '/__w/
 ## enrichOmics/enrichOmics/vignettes/hsa05202.kpath.png' to '/github/home/.local/
-## share/R/EnrichmentBrowser/results/Thu_Jul09_2020_231130/hsa05202_kpath.png',
+## share/R/EnrichmentBrowser/results/Mon_Jul13_2020_202628/hsa05202_kpath.png',
 ## reason 'Invalid cross-device link'</code></pre>
 <pre><code>## Warning in file.rename(from = pv.out, to = img.file): cannot rename file '/__w/
 ## enrichOmics/enrichOmics/vignettes/hsa05412.kpath.png' to '/github/home/.local/
-## share/R/EnrichmentBrowser/results/Thu_Jul09_2020_231130/hsa05412_kpath.png',
+## share/R/EnrichmentBrowser/results/Mon_Jul13_2020_202628/hsa05412_kpath.png',
 ## reason 'Invalid cross-device link'</code></pre>
 <pre><code>## Warning in file.rename(from = pv.out, to = img.file): cannot rename file '/__w/
 ## enrichOmics/enrichOmics/vignettes/hsa05144.kpath.png' to '/github/home/.local/
-## share/R/EnrichmentBrowser/results/Thu_Jul09_2020_231130/hsa05144_kpath.png',
+## share/R/EnrichmentBrowser/results/Mon_Jul13_2020_202628/hsa05144_kpath.png',
 ## reason 'Invalid cross-device link'</code></pre>
 <pre><code>## Warning in file.rename(from = pv.out, to = img.file): cannot rename file '/__w/
 ## enrichOmics/enrichOmics/vignettes/hsa04670.kpath.png' to '/github/home/.local/
-## share/R/EnrichmentBrowser/results/Thu_Jul09_2020_231130/hsa04670_kpath.png',
+## share/R/EnrichmentBrowser/results/Mon_Jul13_2020_202628/hsa04670_kpath.png',
 ## reason 'Invalid cross-device link'</code></pre>
 <pre><code>## Warning in file.rename(from = pv.out, to = img.file): cannot rename file '/__w/
 ## enrichOmics/enrichOmics/vignettes/hsa05100.kpath.png' to '/github/home/.local/
-## share/R/EnrichmentBrowser/results/Thu_Jul09_2020_231130/hsa05100_kpath.png',
+## share/R/EnrichmentBrowser/results/Mon_Jul13_2020_202628/hsa05100_kpath.png',
 ## reason 'Invalid cross-device link'</code></pre>
 <pre><code>## Warning in file.rename(from = pv.out, to = img.file): cannot rename file '/__w/
 ## enrichOmics/enrichOmics/vignettes/hsa04622.kpath.png' to '/github/home/.local/
-## share/R/EnrichmentBrowser/results/Thu_Jul09_2020_231130/hsa04622_kpath.png',
+## share/R/EnrichmentBrowser/results/Mon_Jul13_2020_202628/hsa04622_kpath.png',
 ## reason 'Invalid cross-device link'</code></pre>
 <pre><code>## Warning in file.rename(from = pv.out, to = img.file): cannot rename file '/__w/
 ## enrichOmics/enrichOmics/vignettes/hsa05130.kpath.png' to '/github/home/.local/
-## share/R/EnrichmentBrowser/results/Thu_Jul09_2020_231130/hsa05130_kpath.png',
+## share/R/EnrichmentBrowser/results/Mon_Jul13_2020_202628/hsa05130_kpath.png',
 ## reason 'Invalid cross-device link'</code></pre>
 <p>The resulting summary page includes for each significant gene set</p>
 <ul>
@@ -600,13 +596,13 @@
 <li>for KEGG pathways: highlighting of differentially expressed genes on the pathway maps (column <code>PATH.VIEW</code>, supports mouse-over and click-on).</li>
 </ul>
 <p>As ORA works on the list of DE genes and not the actual expression values, it can be straightforward applied to RNA-seq data. However, as the gene sets here contain NCBI Entrez gene IDs and the airway dataset contains ENSEMBL gene ids, we first map the airway dataset to Entrez IDs.</p>
-<div class="sourceCode" id="cb58"><html><body><pre class="r"><span class="no">airSE</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/idMap.html">idMap</a></span>(<span class="no">airSE</span>, <span class="kw">org</span> <span class="kw">=</span> <span class="st">"hsa"</span>, <span class="kw">from</span> <span class="kw">=</span> <span class="st">"ENSEMBL"</span>, <span class="kw">to</span> <span class="kw">=</span> <span class="st">"ENTREZID"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb54"><html><body><pre class="r"><span class="no">airSE</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/idMap.html">idMap</a></span>(<span class="no">airSE</span>, <span class="kw">org</span> <span class="kw">=</span> <span class="st">"hsa"</span>, <span class="kw">from</span> <span class="kw">=</span> <span class="st">"ENSEMBL"</span>, <span class="kw">to</span> <span class="kw">=</span> <span class="st">"ENTREZID"</span>)</pre></body></html></div>
 <pre><code>## Encountered 85 from.IDs with &gt;1 corresponding to.ID</code></pre>
 <pre><code>## (the first to.ID was chosen for each of them)</code></pre>
 <pre><code>## Excluded 2391 from.IDs without a corresponding to.ID</code></pre>
 <pre><code>## Encountered 6 to.IDs with &gt;1 from.ID (the first from.ID was chosen for each of them)</code></pre>
 <pre><code>## Mapped from.IDs have been added to the rowData column ENSEMBL</code></pre>
-<div class="sourceCode" id="cb64"><html><body><pre class="r"><span class="no">ora.air</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/sbea.html">sbea</a></span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"ora"</span>, <span class="kw">se</span> <span class="kw">=</span> <span class="no">airSE</span>, <span class="kw">gs</span> <span class="kw">=</span> <span class="no">hsa.gs</span>, <span class="kw">perm</span> <span class="kw">=</span> <span class="fl">0</span>)
+<div class="sourceCode" id="cb60"><html><body><pre class="r"><span class="no">ora.air</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/sbea.html">sbea</a></span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"ora"</span>, <span class="kw">se</span> <span class="kw">=</span> <span class="no">airSE</span>, <span class="kw">gs</span> <span class="kw">=</span> <span class="no">hsa.gs</span>, <span class="kw">perm</span> <span class="kw">=</span> <span class="fl">0</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/eaBrowse.html">gsRanking</a></span>(<span class="no">ora.air</span>)</pre></body></html></div>
 <pre><code>## DataFrame with 9 rows and 4 columns
 ##                 GENE.SET  NR.GENES NR.SIG.GENES      PVAL
@@ -628,7 +624,7 @@
 <a href="#functional-class-scoring-permutation-testing" class="anchor"></a>Functional class scoring &amp; permutation testing</h2>
 <p>A major limitation of ORA is that it restricts analysis to DE genes, excluding genes not satisfying the chosen significance threshold (typically the vast majority).</p>
 <p>This is resolved by gene set enrichment analysis (GSEA), which scores the tendency of gene set members to appear rather at the top or bottom of the ranked list of all measured genes <a href="https://doi.org/10.1073/pnas.0506580102">Subramanian et al., 2005</a>. The statistical significance of the enrichment score (ES) of a gene set is assessed via sample permutation, i.e. (1) sample labels (= group assignment) are shuffled, (2) per-gene DE statistics are recomputed, and (3) the enrichment score is recomputed. Repeating this procedure many times allows to determine the empirical distribution of the enrichment score and to compare the observed enrichment score against it. Here, we carry out GSEA with 1000 permutations.</p>
-<div class="sourceCode" id="cb66"><html><body><pre class="r"><span class="no">gsea.all</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/sbea.html">sbea</a></span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"gsea"</span>, <span class="kw">se</span> <span class="kw">=</span> <span class="no">allSE</span>, <span class="kw">gs</span> <span class="kw">=</span> <span class="no">hsa.gs</span>, <span class="kw">perm</span> <span class="kw">=</span> <span class="fl">1000</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb62"><html><body><pre class="r"><span class="no">gsea.all</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/sbea.html">sbea</a></span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"gsea"</span>, <span class="kw">se</span> <span class="kw">=</span> <span class="no">allSE</span>, <span class="kw">gs</span> <span class="kw">=</span> <span class="no">hsa.gs</span>, <span class="kw">perm</span> <span class="kw">=</span> <span class="fl">1000</span>)</pre></body></html></div>
 <pre><code>## Permutations: 1 -- 100</code></pre>
 <pre><code>## Permutations: 101 -- 200</code></pre>
 <pre><code>## Permutations: 201 -- 300</code></pre>
@@ -640,7 +636,7 @@
 <pre><code>## Permutations: 801 -- 900</code></pre>
 <pre><code>## Permutations: 901 -- 1000</code></pre>
 <pre><code>## Processing ...</code></pre>
-<div class="sourceCode" id="cb78"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/eaBrowse.html">gsRanking</a></span>(<span class="no">gsea.all</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb74"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/eaBrowse.html">gsRanking</a></span>(<span class="no">gsea.all</span>)</pre></body></html></div>
 <pre><code>## DataFrame with 19 rows and 4 columns
 ##                   GENE.SET        ES       NES      PVAL
 ##                &lt;character&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;
@@ -656,9 +652,9 @@
 ## 18  hsa05130_Pathogenic_..     0.486      1.52    0.0283
 ## 19      hsa04210_Apoptosis     0.424      1.42    0.0413</code></pre>
 <p>As GSEA’s permutation procedure involves re-computation of per-gene DE statistics, adaptations are necessary for RNA-seq. When analyzing RNA-seq datasets with expression values given as logTPMs (or logRPKMs / logFPKMs), the available set-based enrichment methods can be applied as for microarray data. However, when given raw read counts as for the airway dataset, we recommend to first apply a variance-stabilizing transformation such as <code>voom</code> to arrive at library-size normalized logCPMs.</p>
-<div class="sourceCode" id="cb80"><html><body><pre class="r"><span class="no">airSE</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/normalize.html">normalize</a></span>(<span class="no">airSE</span>, <span class="kw">norm.method</span> <span class="kw">=</span> <span class="st">"vst"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb76"><html><body><pre class="r"><span class="no">airSE</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/normalize.html">normalize</a></span>(<span class="no">airSE</span>, <span class="kw">norm.method</span> <span class="kw">=</span> <span class="st">"vst"</span>)</pre></body></html></div>
 <p>The mean-variance relationship of the transformed data is similar to what is observed for microarray data, simplifying the application of legacy enrichment methods such as GSEA and PADOG to RNA-seq data, and enable the use of fast and established methods.</p>
-<div class="sourceCode" id="cb81"><html><body><pre class="r"><span class="no">gsea.air</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/sbea.html">sbea</a></span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"gsea"</span>, <span class="kw">se</span> <span class="kw">=</span> <span class="no">airSE</span>, <span class="kw">gs</span> <span class="kw">=</span> <span class="no">hsa.gs</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb77"><html><body><pre class="r"><span class="no">gsea.air</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/sbea.html">sbea</a></span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"gsea"</span>, <span class="kw">se</span> <span class="kw">=</span> <span class="no">airSE</span>, <span class="kw">gs</span> <span class="kw">=</span> <span class="no">hsa.gs</span>)</pre></body></html></div>
 <pre><code>## Permutations: 1 -- 100</code></pre>
 <pre><code>## Permutations: 101 -- 200</code></pre>
 <pre><code>## Permutations: 201 -- 300</code></pre>
@@ -671,7 +667,7 @@
 <pre><code>## Permutations: 901 -- 1000</code></pre>
 <pre><code>## Processing ...</code></pre>
 <p>While it might be in some cases necessary to apply permutation-based GSEA for RNA-seq data, there are also alternatives avoiding permutation. Among them is ROtAtion gene Set Testing (ROAST), which uses rotation instead of permutation <a href="https://doi.org/10.1093/bioinformatics/btq401">Wu et al., 2010</a>.</p>
-<div class="sourceCode" id="cb93"><html><body><pre class="r"><span class="no">roast.air</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/sbea.html">sbea</a></span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"roast"</span>, <span class="kw">se</span> <span class="kw">=</span> <span class="no">airSE</span>, <span class="kw">gs</span> <span class="kw">=</span> <span class="no">hsa.gs</span>)
+<div class="sourceCode" id="cb89"><html><body><pre class="r"><span class="no">roast.air</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/sbea.html">sbea</a></span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"roast"</span>, <span class="kw">se</span> <span class="kw">=</span> <span class="no">airSE</span>, <span class="kw">gs</span> <span class="kw">=</span> <span class="no">hsa.gs</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/eaBrowse.html">gsRanking</a></span>(<span class="no">roast.air</span>)</pre></body></html></div>
 <pre><code>## DataFrame with 23 rows and 4 columns
 ##                   GENE.SET  NR.GENES       DIR      PVAL
@@ -688,7 +684,7 @@
 ## 22  hsa04514_Cell_adhesi..        74        -1     0.025
 ## 23  hsa04550_Signaling_p..       101         1     0.038</code></pre>
 <p>A selection of additional methods is also available:</p>
-<div class="sourceCode" id="cb95"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/sbea.html">sbeaMethods</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb91"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/sbea.html">sbeaMethods</a></span>()</pre></body></html></div>
 <pre><code>##  [1] "ora"        "safe"       "gsea"       "gsa"        "padog"     
 ##  [6] "globaltest" "roast"      "camera"     "gsva"       "samgs"     
 ## [11] "ebm"        "mgsa"</code></pre>
@@ -701,7 +697,7 @@
 <p>For example, we want to know whether transcription factors and their target genes are expressed in accordance to the connecting regulations (activation/inhibition). Such information is usually given in a gene regulatory network derived from specific experiments or compiled from the literature (<a href="https://doi.org/10.1093/nar/gkt631">Geistlinger et al., 2013</a> for an example).</p>
 <p>There are well-studied processes and organisms for which comprehensive and well-annotated regulatory networks are available, e.g. the <a href="http://regulondb.ccg.unam.mx">RegulonDB</a> for <em>E. coli</em> and <a href="http://www.yeastract.com">Yeastract</a> for <em>S. cerevisiae</em>.</p>
 <p>However, there are also cases where such a network is missing or at least incomplete. A basic workaround is to compile a network from regulations in pathway databases such as KEGG.</p>
-<div class="sourceCode" id="cb97"><html><body><pre class="r"><span class="no">hsa.grn</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/compileGRN.html">compileGRN</a></span>(<span class="kw">org</span> <span class="kw">=</span> <span class="st">"hsa"</span>, <span class="kw">db</span> <span class="kw">=</span> <span class="st">"kegg"</span>)
+<div class="sourceCode" id="cb93"><html><body><pre class="r"><span class="no">hsa.grn</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/compileGRN.html">compileGRN</a></span>(<span class="kw">org</span> <span class="kw">=</span> <span class="st">"hsa"</span>, <span class="kw">db</span> <span class="kw">=</span> <span class="st">"kegg"</span>)
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">hsa.grn</span>)</pre></body></html></div>
 <pre><code>##      FROM    TO          TYPE
 ## [1,] "10000" "100132074" "-" 
@@ -711,7 +707,7 @@
 ## [5,] "10000" "107"       "+" 
 ## [6,] "10000" "107080638" "-"</code></pre>
 <p>Signaling pathway impact analysis (SPIA) is a network-based enrichment analysis method, which is explicitly designed for KEGG signaling pathways <a href="https://doi.org/%2010.1093/bioinformatics/btn577">Tarca et al., 2009</a>. The method evaluates whether expression changes are propagated across the pathway topology in combination with ORA.</p>
-<div class="sourceCode" id="cb99"><html><body><pre class="r"><span class="no">spia.all</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/nbea.html">nbea</a></span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"spia"</span>, <span class="kw">se</span> <span class="kw">=</span> <span class="no">allSE</span>, <span class="kw">gs</span> <span class="kw">=</span> <span class="no">hsa.gs</span>, <span class="kw">grn</span> <span class="kw">=</span> <span class="no">hsa.grn</span>, <span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">0.2</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb95"><html><body><pre class="r"><span class="no">spia.all</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/nbea.html">nbea</a></span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"spia"</span>, <span class="kw">se</span> <span class="kw">=</span> <span class="no">allSE</span>, <span class="kw">gs</span> <span class="kw">=</span> <span class="no">hsa.gs</span>, <span class="kw">grn</span> <span class="kw">=</span> <span class="no">hsa.grn</span>, <span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">0.2</span>)</pre></body></html></div>
 <pre><code>## 
 ## Done pathway 1 : RNA transport..
 ## Done pathway 2 : RNA degradation..
@@ -853,7 +849,7 @@
 ## Done pathway 138 : Dilated cardiomyopathy..
 ## Done pathway 139 : Viral myocarditis..</code></pre>
 <pre><code>## Finished SPIA analysis</code></pre>
-<div class="sourceCode" id="cb102"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/eaBrowse.html">gsRanking</a></span>(<span class="no">spia.all</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb98"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/eaBrowse.html">gsRanking</a></span>(<span class="no">spia.all</span>)</pre></body></html></div>
 <pre><code>## DataFrame with 5 rows and 6 columns
 ##                 GENE.SET      SIZE       NDE     T.ACT    STATUS      PVAL
 ##              &lt;character&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt; &lt;numeric&gt;
@@ -863,7 +859,7 @@
 ## 4 hsa04630_Jak-STAT_si..        72         8    -1.060        -1    0.0908
 ## 5 hsa05143_African_try..        22         4     0.263         1    0.1790</code></pre>
 <p>More generally applicable is gene graph enrichment analysis (GGEA), which evaluates consistency of interactions in a given gene regulatory network with the observed expression data <a href="https://doi.org/10.1093/bioinformatics/btr228">Geistlinger et al., 2011</a>.</p>
-<div class="sourceCode" id="cb104"><html><body><pre class="r"><span class="no">ggea.all</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/nbea.html">nbea</a></span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"ggea"</span>, <span class="kw">se</span> <span class="kw">=</span> <span class="no">allSE</span>, <span class="kw">gs</span> <span class="kw">=</span> <span class="no">hsa.gs</span>, <span class="kw">grn</span> <span class="kw">=</span> <span class="no">hsa.grn</span>)
+<div class="sourceCode" id="cb100"><html><body><pre class="r"><span class="no">ggea.all</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/nbea.html">nbea</a></span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"ggea"</span>, <span class="kw">se</span> <span class="kw">=</span> <span class="no">allSE</span>, <span class="kw">gs</span> <span class="kw">=</span> <span class="no">hsa.gs</span>, <span class="kw">grn</span> <span class="kw">=</span> <span class="no">hsa.grn</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/eaBrowse.html">gsRanking</a></span>(<span class="no">ggea.all</span>)</pre></body></html></div>
 <pre><code>## DataFrame with 8 rows and 5 columns
 ##                 GENE.SET   NR.RELS RAW.SCORE NORM.SCORE      PVAL
@@ -876,13 +872,13 @@
 ## 6 hsa04520_Adherens_ju..        13      5.02      0.386     0.025
 ## 7 hsa04550_Signaling_p..        36     13.10      0.363     0.025
 ## 8 hsa05412_Arrhythmoge..         4      1.75      0.437     0.045</code></pre>
-<div class="sourceCode" id="cb106"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/nbea.html">nbeaMethods</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb102"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/nbea.html">nbeaMethods</a></span>()</pre></body></html></div>
 <pre><code>## [1] "ggea"        "spia"        "pathnet"     "degraph"     "ganpa"      
 ## [6] "cepa"        "topologygsa" "netgsa"</code></pre>
 <p>Note #1: As network-based enrichment methods typically do not involve sample permutation but rather network permutation, thus avoiding DE re-computation, they can likewise be applied to RNA-seq data.</p>
 <p>Note #2: Given the various enrichment methods with individual benefits and limitations, combining multiple methods can be beneficial, e.g. combined application of a set-based and a network-based method. This has been shown to filter out spurious hits of individual methods and to reduce the outcome to gene sets accumulating evidence from different methods <a href="https://doi.org/10.1186/s12859-016-0884-1">Geistlinger et al., 2016</a>, <a href="https://doi.org/10.1093/bioinformatics/btw623">Alhamdoosh et al., 2017</a>.</p>
 <p>The function <code>combResults</code> implements the straightforward combination of results, thereby facilitating seamless comparison of results across methods. For demonstration, we use the ORA and GSEA results for the ALL dataset from the previous section:</p>
-<div class="sourceCode" id="cb108"><html><body><pre class="r"><span class="no">res.list</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">ora.all</span>, <span class="no">gsea.all</span>)
+<div class="sourceCode" id="cb104"><html><body><pre class="r"><span class="no">res.list</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">ora.all</span>, <span class="no">gsea.all</span>)
 <span class="no">comb.res</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/combResults.html">combResults</a></span>(<span class="no">res.list</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/EnrichmentBrowser/man/eaBrowse.html">gsRanking</a></span>(<span class="no">comb.res</span>)</pre></body></html></div>
 <pre><code>## DataFrame with 20 rows and 6 columns
@@ -909,11 +905,11 @@
 <p>Such experimentally-derived genomic region sets are raising similar questions regarding functional enrichment as in gene expression data analysis.</p>
 <p>Of particular interest is thereby whether experimentally-derived regions overlap more (enrichment) or less (depletion) than expected by chance with regions representing known functional features such as genes or promoters.</p>
 <p>The <a href="http://bioconductor.org/packages/regioneR">regioneR</a> package implements a general framework for testing overlaps of genomic regions based on permutation sampling. This allows to repeatedly sample random regions from the genome, matching size and chromosomal distribution of the region set under study. By recomputing the overlap with the functional features in each permutation, statistical significance of the observed overlap can be assessed.</p>
-<div class="sourceCode" id="cb110"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">regioneR</span>)
+<div class="sourceCode" id="cb106"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">regioneR</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">BSgenome.Hsapiens.UCSC.hg19.masked</span>)</pre></body></html></div>
 <p>To demonstrate the basic functionality of the package, we consider the overlap of gene promoter regions and CpG islands in the human genome. We expect to find an enrichment as promoter regions are known to be GC-rich. Hence, is the overlap between CpG islands and promoters greater than expected by chance?</p>
 <p>We use the collection of CpG islands described in <a href="https://doi.org/10.1093/biostatistics/kxq005">Wu et al., 2010</a> and restrict them to the set of canonical chromosomes 1-23, <em>X</em>, and <em>Y</em>.</p>
-<div class="sourceCode" id="cb111"><html><body><pre class="r"><span class="no">cpgHMM</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span>(<span class="st">"http://www.haowulab.org/software/makeCGI/model-based-cpg-islands-hg19.txt"</span>)
+<div class="sourceCode" id="cb107"><html><body><pre class="r"><span class="no">cpgHMM</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span>(<span class="st">"http://www.haowulab.org/software/makeCGI/model-based-cpg-islands-hg19.txt"</span>)
 <span class="no">cpgHMM</span> <span class="kw">&lt;-</span> <span class="fu">makeGRangesFromDataFrame</span>(<span class="no">cpgHMM</span>, <span class="kw">keep.extra.columns</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
 <span class="fu">genome</span>(<span class="no">cpgHMM</span>) <span class="kw">&lt;-</span> <span class="st">"hg19"</span>
 <span class="no">cpgHMM</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/regioneR/man/filterChromosomes.html">filterChromosomes</a></span>(<span class="no">cpgHMM</span>, <span class="kw">chr.type</span> <span class="kw">=</span> <span class="st">"canonical"</span>)
@@ -949,7 +945,7 @@
 ##   -------
 ##   seqinfo: 24 sequences from hg19 genome; no seqlengths</code></pre>
 <p>Analogously, we load promoter regions in the <em>hg19</em> human genome assembly as available from <a href="https://genome.ucsc.edu/">UCSC</a>:</p>
-<div class="sourceCode" id="cb113"><html><body><pre class="r"><span class="no">promoters</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span>(<span class="st">"http://gattaca.imppc.org/regioner/data/UCSC.promoters.hg19.bed"</span>)
+<div class="sourceCode" id="cb109"><html><body><pre class="r"><span class="no">promoters</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim</a></span>(<span class="st">"http://gattaca.imppc.org/regioner/data/UCSC.promoters.hg19.bed"</span>)
 <span class="no">promoters</span> <span class="kw">&lt;-</span> <span class="fu">makeGRangesFromDataFrame</span>(<span class="no">promoters</span>, <span class="kw">keep.extra.columns</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
 <span class="fu">genome</span>(<span class="no">promoters</span>) <span class="kw">&lt;-</span> <span class="st">"hg19"</span>
 <span class="no">promoters</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/regioneR/man/filterChromosomes.html">filterChromosomes</a></span>(<span class="no">promoters</span>, <span class="kw">chr.type</span> <span class="kw">=</span> <span class="st">"canonical"</span>)
@@ -985,17 +981,17 @@
 ##   -------
 ##   seqinfo: 24 sequences from hg19 genome; no seqlengths</code></pre>
 <p>To speed up the example, we restrict analysis to chromosomes 21 and 22. Note that this is done for demonstration only. To make an accurate claim, the complete region set should be used (which, however, runs considerably longer).</p>
-<div class="sourceCode" id="cb115"><html><body><pre class="r"><span class="no">cpg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">cpgHMM</span>, <span class="no">seqnames</span> <span class="kw">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"chr21"</span>, <span class="st">"chr22"</span>))
+<div class="sourceCode" id="cb111"><html><body><pre class="r"><span class="no">cpg</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">cpgHMM</span>, <span class="no">seqnames</span> <span class="kw">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"chr21"</span>, <span class="st">"chr22"</span>))
 <span class="no">prom</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">promoters</span>, <span class="no">seqnames</span> <span class="kw">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"chr21"</span>, <span class="st">"chr22"</span>))</pre></body></html></div>
 <p>Now, we are applying an overlap permutation test with 100 permutations (<code>ntimes = 100</code>), while maintaining chromosomal distribution of the CpG island region set (<code>per.chromosome = TRUE</code>). Furthermore, we use the option <code>count.once = TRUE</code> to count an overlapping CpG island only once, even if it overlaps with 2 or more promoters.</p>
 <p>Note that we use 100 permutations for demonstration only. To draw robust conclusions a minimum of 1000 permutations should be carried out.</p>
-<div class="sourceCode" id="cb116"><html><body><pre class="r"><span class="no">res</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/regioneR/man/overlapPermTest.html">overlapPermTest</a></span>(<span class="no">cpg</span>, <span class="no">prom</span>,
+<div class="sourceCode" id="cb112"><html><body><pre class="r"><span class="no">res</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/regioneR/man/overlapPermTest.html">overlapPermTest</a></span>(<span class="no">cpg</span>, <span class="no">prom</span>, <span class="kw">mask</span> <span class="kw">=</span> <span class="fl">NA</span>,
                        <span class="kw">genome</span> <span class="kw">=</span> <span class="st">"hg19"</span>, <span class="kw">ntimes</span> <span class="kw">=</span> <span class="fl">100</span>,
                        <span class="kw">per.chromosome</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">count.once</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
 <span class="no">res</span></pre></body></html></div>
 <pre><code>## $numOverlaps
 ## P-value: 0.0099009900990099
-## Z-score: 46.246
+## Z-score: 53.6952
 ## Number of iterations: 100
 ## Alternative: greater
 ## Evaluation of the original region set: 719
@@ -1004,10 +1000,10 @@
 ## 
 ## attr(,"class")
 ## [1] "permTestResultsList"</code></pre>
-<div class="sourceCode" id="cb118"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">res</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">permuted</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb114"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">res</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">permuted</span>)</pre></body></html></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   144.0   159.0   168.5   168.6   177.2   198.0</code></pre>
-<p>The resulting permutation <em>p</em>-value indicates a significant enrichment. Out of the 2859 CpG islands, 719 overlap with at least one promoter. In contrast, when repeatedly drawing random regions matching the CpG islands in size and chromosomal distribution, the mean number of overlapping regions across permutations was 168.6 <span class="math inline">\(\pm\)</span> 11.9.</p>
+##    94.0   111.0   118.5   119.1   127.0   148.0</code></pre>
+<p>The resulting permutation <em>p</em>-value indicates a significant enrichment. Out of the 2859 CpG islands, 719 overlap with at least one promoter. In contrast, when repeatedly drawing random regions matching the CpG islands in size and chromosomal distribution, the mean number of overlapping regions across permutations was 119.1 <span class="math inline">\(\pm\)</span> 11.2.</p>
 <p>Note #1: The function <code><a href="https://rdrr.io/pkg/regioneR/man/permTest.html">regioneR::permTest</a></code> allows to incorporate user-defined functions for randomizing regions and evaluating additional measures of overlap such as total genomic size in bp.</p>
 <p>Note #2: The <a href="http://bioconductor.org/packages/LOLA">LOLA</a> package implements a genomic region ORA, which assesses genomic region overlap based on the hypergeometric distribution using a library of pre-defined functional region sets.</p>
 </div>

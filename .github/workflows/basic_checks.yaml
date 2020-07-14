@@ -34,8 +34,11 @@ jobs:
           
       - name: Install dependencies
         run: |
+          options(repos = c(CRAN = "https://cran.r-project.org"))
+          BiocManager::repositories()  
           remotes::install_deps(dependencies = TRUE, repos = c(CRAN = "https://cran.r-project.org"))
           remotes::install_cran("rcmdcheck")
+          BiocManager::install("lgeistlinger/EnrichmentBrowser")
         shell: Rscript {0}
 
       - name: Check

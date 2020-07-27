@@ -963,7 +963,7 @@
 <span class="no">res</span></pre></body></html></div>
 <pre><code>## $numOverlaps
 ## P-value: 0.0099009900990099
-## Z-score: 57.6466
+## Z-score: 53.3866
 ## Number of iterations: 100
 ## Alternative: greater
 ## Evaluation of the original region set: 719
@@ -974,8 +974,8 @@
 ## [1] "permTestResultsList"</code></pre>
 <div class="sourceCode" id="cb107"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(<span class="no">res</span><span class="kw">[[</span><span class="fl">1</span>]]$<span class="no">permuted</span>)</pre></body></html></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    92.0   111.0   119.0   118.3   125.0   144.0</code></pre>
-<p>The resulting permutation <em>p</em>-value indicates a significant enrichment. Out of the 2859 CpG islands, 719 overlap with at least one promoter. In contrast, when repeatedly drawing random regions matching the CpG islands in size and chromosomal distribution, the mean number of overlapping regions across permutations was 118.3 <span class="math inline">\(\pm\)</span> 10.4.</p>
+##    92.0   110.0   118.0   117.7   125.0   150.0</code></pre>
+<p>The resulting permutation <em>p</em>-value indicates a significant enrichment. Out of the 2859 CpG islands, 719 overlap with at least one promoter. In contrast, when repeatedly drawing random regions matching the CpG islands in size and chromosomal distribution, the mean number of overlapping regions across permutations was 117.7 <span class="math inline">\(\pm\)</span> 11.3.</p>
 <p>Note #1: The function <code><a href="https://rdrr.io/pkg/regioneR/man/permTest.html">regioneR::permTest</a></code> allows to incorporate user-defined functions for randomizing regions and evaluating additional measures of overlap such as total genomic size in bp.</p>
 <p>Note #2: The <a href="http://bioconductor.org/packages/LOLA">LOLA</a> package implements a genomic region ORA, which assesses genomic region overlap based on the hypergeometric distribution using a library of pre-defined functional region sets.</p>
 </div>

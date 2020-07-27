@@ -20,12 +20,12 @@ Imports:
     BSgenome.Hsapiens.UCSC.hg19.masked,
     ReportingTools,
     airway,
-    hgu95av2.db, 
-    msigdbr    
+    hgu95av2.db    
 Suggests:
     knitr,
     rmarkdown,
-    pkgdown
+    pkgdown,
+    msigdbr
 VignetteBuilder: knitr
 License: Artistic-2.0
 URL: https://waldronlab.github.io/enrichOmics/

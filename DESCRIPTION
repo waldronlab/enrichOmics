@@ -24,8 +24,7 @@ Imports:
 Suggests:
     knitr,
     rmarkdown,
-    pkgdown,
-    msigdbr
+    pkgdown
 VignetteBuilder: knitr
 License: Artistic-2.0
 URL: https://waldronlab.github.io/enrichOmics/

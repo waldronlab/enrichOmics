@@ -1,10 +1,15 @@
-![](https://github.com/waldronlab/enrichOmics/workflows/.github/workflows/basic_checks.yaml/badge.svg)
-
 # Functional enrichment analysis of high-throughput omics data
 
 [Workshop website](https://waldronlab.github.io/enrichOmics)
 
+Quick install: 
+
+```
+BiocManager::install("waldronlab/enrichOmics", dependencies = TRUE, build_vignettes = TRUE)
+```
+
 [Docker image](https://hub.docker.com/repository/docker/ludwigg/enrichomics)
+
 
 # Instructor(s) name(s) and contact information
 

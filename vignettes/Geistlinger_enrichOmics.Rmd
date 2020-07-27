@@ -12,6 +12,7 @@ output:
 ```{r, include = FALSE}
 library(knitr)
 opts_chunk$set(out.width = "100%", cache = TRUE)
+options(repos = c(CRAN = 'https://cloud.r-project.org')) 
 ```
 
 ## Workshop information

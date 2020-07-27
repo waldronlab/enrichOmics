@@ -15,12 +15,14 @@ Depends:
     EnrichmentBrowser,
     regioneR,
     statmod
-Suggests:
+Imports:
     ALL,
     BSgenome.Hsapiens.UCSC.hg19.masked,
     ReportingTools,
     airway,
     hgu95av2.db, 
+    msigdbr    
+Suggests:
     knitr,
     rmarkdown,
     pkgdown

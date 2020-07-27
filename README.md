@@ -1,17 +1,18 @@
+![](https://github.com/waldronlab/enrichOmics/workflows/.github/workflows/basic_checks.yaml/badge.svg)
+
 # Functional enrichment analysis of high-throughput omics data
 
-[Workshop website](https://waldronlab.github.io/enrichOmics)
-
-Quick install: 
+## Quick install
 
 ```
 BiocManager::install("waldronlab/enrichOmics", dependencies = TRUE, build_vignettes = TRUE)
 ```
 
+[Workshop website](https://waldronlab.github.io/enrichOmics)
+
 [Docker image](https://hub.docker.com/repository/docker/ludwigg/enrichomics)
 
-
-# Instructor(s) name(s) and contact information
+## Instructor(s) name(s) and contact information
 
 Ludwig Geistlinger and Levi Waldron
 
@@ -20,7 +21,7 @@ CUNY School of Public Health
 
 Ludwig.Geistlinger@sph.cuny.edu
 
-# Workshop Description
+## Workshop Description
 
 This workshop gives an in-depth overview of existing methods for enrichment 
 analysis of gene expression data with regard to functional gene sets, pathways, 
@@ -64,7 +65,7 @@ Execution of example code and hands-on practice
 | Genomic region analysis               | 15m  |
 
 
-# Goals and objectives
+## Goals and objectives
 
 Theory
 * Gene sets, pathways & regulatory networks

@@ -3,7 +3,7 @@ pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
   Geistlinger_enrichOmics: Geistlinger_enrichOmics.html
-last_built: 2020-07-27T21:32Z
+last_built: 2020-07-28T12:28Z
 urls:
   reference: https://waldronlab.io/enrichOmics/reference
   article: https://waldronlab.io/enrichOmics/articles

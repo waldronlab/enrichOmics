@@ -617,6 +617,7 @@ from Enrichr via:
 
 ```{r enrichr, eval = FALSE}
 tfppi.gs <- getGenesets(org = "hsa", db = "enrichr", lib = "Transcription_Factor_PPIs")
+tfppi.gs[1:2]
 ```
 
 Note #3: The `idMap` function can be used to map gene sets from NCBI Entrez Gene
@@ -677,7 +678,7 @@ airSE <- idMap(airSE, org = "hsa", from = "ENSEMBL", to = "ENTREZID")
 ```
 
 ```{R}
-ora.air <- sbea(method = "ora", se = airSE, gs = hsa.gs, perm = 0)
+ora.air <- sbea(method = "ora", se = airSE, gs = go.gs, perm = 0)
 gsRanking(ora.air)
 ```
 
@@ -745,7 +746,7 @@ methods such as GSEA and PADOG to RNA-seq data, and enable the use of fast and
 established methods.
 
 ```{R}
-gsea.air <- sbea(method = "gsea", se = airSE, gs = hsa.gs)  
+gsea.air <- sbea(method = "gsea", se = airSE, gs = kegg.gs)  
 ```
 
 While it might be in some cases necessary to apply permutation-based GSEA for
